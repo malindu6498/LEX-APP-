@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lex · Legal assistance · IntelliCon'26</title>
+  <meta name="description" content="Ask legal questions anonymously and get answers from verified lawyers." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css?v=13" />
+</head>
+<body data-screen="landing" data-area="auth">
+
+  <!-- ============ TOP NAVBAR (hidden on the Welcome screen) ============ -->
+  <header class="navbar" id="navbar">
+    <button type="button" class="nav-brand" id="nav-brand" aria-label="Lex home">
+      <img class="nav-logo" src="./logo.png" alt="LEX Logo" />
+    </button>
+
+    <div class="nav-right">
+      <!-- Client screens -->
+      <div class="nav-group nav-client">
+        <span class="nav-chip">Client</span>
+        <button type="button" class="nav-link-btn" data-go="landing">Sign out</button>
+      </div>
+
+      <!-- Lawyer registration -->
+      <div class="nav-group nav-register">
+        <span class="nav-chip nav-chip-gold">Lawyer application</span>
+        <button type="button" class="nav-link-btn" data-go="welcome">Back</button>
+      </div>
+
+      <!-- Lawyer screens: profile picture opens the Profile screen -->
+      <div class="nav-group nav-lawyer">
+        <button type="button" class="nav-user" data-open="profile" aria-label="Open profile">
+          <span class="nav-user-text">
+            <strong id="nav-name">Alexandra Chen</strong>
+            <em>Verified lawyer</em>
+          </span>
+          <span class="nav-avatar">
+            <svg viewBox="0 0 40 40" width="100%" height="100%" aria-hidden="true">
+              <defs>
+                <linearGradient id="avatarBg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#1c3358" />
+                  <stop offset="1" stop-color="#0c1c33" />
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" fill="url(#avatarBg)" />
+              <circle cx="20" cy="15.5" r="6.5" fill="#d8bc76" />
+              <path d="M6.5 40c1.2-8.2 6.6-12.5 13.5-12.5S32.3 31.8 33.5 40z" fill="#c4a35a" />
+            </svg>
+            <span class="nav-avatar-tick" aria-hidden="true">
+              <svg viewBox="0 0 12 12" width="9" height="9">
+                <path d="M2.6 6.3l2.2 2.2 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ============ LEFT SIDEBAR (lawyer screens only) ============ -->
+    <aside class="sidebar" aria-label="Lawyer navigation">
+      <p class="side-label">Workspace</p>
+
+      <nav class="side-nav">
+        <button type="button" class="side-link" data-go="dashboard">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7.5" height="7.5" rx="1.8" />
+            <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.8" />
+            <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.8" />
+            <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.8" />
+          </svg>
+          <span>Overview</span>
+        </button>
+
+        <button type="button" class="side-link" data-open="common-chat">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="8" r="3.3" />
+            <path d="M2.8 19.5c0-3.2 2.8-5.2 6.2-5.2s6.2 2 6.2 5.2" />
+            <circle cx="17.2" cy="9" r="2.5" />
+            <path d="M17.4 14.3c2.3.1 3.8 1.7 3.8 4" />
+          </svg>
+          <span>Common Chat</span>
+        </button>
+
+        <button type="button" class="side-link" data-open="notifications">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2.5h16L18 16z" />
+            <path d="M10 21h4" />
+          </svg>
+          <span>Notifications</span>
+          <span class="side-badge" aria-label="3 unread">3</span>
+        </button>
+
+        <button type="button" class="side-link" data-open="my-room">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3.5" width="18" height="17" rx="2.5" />
+            <path d="M3 9.5h18" />
+            <path d="M9.5 9.5v11" />
+          </svg>
+          <span>My Room</span>
+        </button>
+
+        <button type="button" class="side-link" data-open="personal-chat">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4.5 4.5h15a1.5 1.5 0 0 1 1.5 1.5v9.5a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17H4.5A1.5 1.5 0 0 1 3 15.5V6a1.5 1.5 0 0 1 1.5-1.5z" />
+            <path d="M8 9.5h8M8 12.5h5" />
+          </svg>
+          <span>Personal Chat</span>
+        </button>
+
+        <button type="button" class="side-link" data-open="vault">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="10.5" width="16" height="10" rx="2.5" />
+            <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
+            <circle cx="12" cy="15.5" r="1.2" />
+          </svg>
+          <span>Vault</span>
+        </button>
+      </nav>
+
+      <button type="button" class="side-link side-signout" data-go="landing">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <path d="M16 17l5-5-5-5" />
+          <path d="M21 12H9" />
+        </svg>
+        <span>Sign out</span>
+      </button>
+    </aside>
+
+    <main class="site">
+
+      <!-- ============ 0a. LANDING (default view) ============ -->
+      <section id="screen-landing" class="screen screen-welcome screen-landing is-active" aria-label="Welcome to Lex">
+        <div class="welcome-backdrop" aria-hidden="true"></div>
+
+        <header class="welcome-brand">
+          <img class="welcome-logo" src="./logo.png" alt="LEX Logo" />
+          <p class="brand-kicker">Legal assistance</p>
+          <h1 class="sr-only">Lex</h1>
+          <p class="brand-tagline">
+            Ask legal questions anonymously. Get answers from lawyers whose credentials have been checked.
+          </p>
+        </header>
+
+        <div class="landing-actions">
+          <button type="button" class="landing-btn landing-btn-primary" id="btn-signin">Sign In</button>
+          <button type="button" class="landing-btn landing-btn-outline" id="btn-signup">Sign Up</button>
+        </div>
+
+        <p class="welcome-footnote">IntelliCon'26 prototype</p>
+      </section>
+
+      <!-- ============ 0b. SIGN IN ============ -->
+      <section id="screen-signin" class="screen screen-signin" aria-label="Sign in" hidden aria-hidden="true">
+        <div class="auth-split">
+
+          <aside class="auth-brand">
+            <div class="auth-brand-glow" aria-hidden="true"></div>
+            <img class="auth-logo" src="./logo.png" alt="LEX Logo" />
+
+            <div class="auth-brand-copy">
+              <h2>Legal help, without exposing who you are.</h2>
+              <p>Ask anonymously, get answers from lawyers whose credentials have been checked.</p>
+            </div>
+
+            <ul class="auth-points">
+              <li><strong>Anonymous questions</strong><span>Clients are shown only as a random ID.</span></li>
+              <li><strong>Verified lawyers</strong><span>Every lawyer submits a document before answering.</span></li>
+              <li><strong>Private by design</strong><span>No names or identifying details required.</span></li>
+            </ul>
+          </aside>
+
+          <div class="auth-panel">
+            <button type="button" class="auth-back-link" data-go="landing">&larr; Back</button>
+
+            <div class="auth-card">
+              <p class="eyebrow">Welcome back</p>
+              <h1>Sign in to Lex</h1>
+              <p class="auth-sub">Enter your details to continue.</p>
+
+              <form id="signin-form" class="auth-form">
+                <fieldset class="role-toggle">
+                  <legend class="sr-only">Sign in as</legend>
+                  <label><input type="radio" name="role" value="client" checked /><span>Client</span></label>
+                  <label><input type="radio" name="role" value="lawyer" /><span>Lawyer</span></label>
+                </fieldset>
+
+                <label for="signin-email">Email
+                  <input type="email" id="signin-email" name="email" autocomplete="email" placeholder="you@example.com" required />
+                </label>
+
+                <label for="signin-password">Password
+                  <span class="pw-field">
+                    <input type="password" id="signin-password" name="password" autocomplete="current-password" placeholder="Enter your password" required />
+                    <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Show password" aria-pressed="false">Show</button>
+                  </span>
+                </label>
+
+                <div class="auth-meta">
+                  <button type="button" class="link-btn" data-soon="Password reset">Forgot password?</button>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+                <p class="form-note is-error" id="signin-note" role="alert" hidden></p>
+              </form>
+
+              <p class="auth-switch">New to Lex? <button type="button" class="link-btn" data-go="welcome">Sign up</button></p>
+              <p class="auth-hint">Prototype: any email and password will sign you in.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ 1. SIGN UP: CHOOSE A ROLE ============ -->
+      <section id="screen-welcome" class="screen screen-welcome" aria-label="Sign up: choose your role" hidden aria-hidden="true">
+        <div class="welcome-backdrop" aria-hidden="true"></div>
+
+        <button type="button" class="auth-back" data-go="landing">&larr; Back</button>
+
+        <header class="welcome-brand">
+          <img class="welcome-logo" src="./logo.png" alt="LEX Logo" />
+          <p class="brand-kicker">Create your account</p>
+          <h1 class="sr-only">Sign up for Lex</h1>
+          <p class="brand-tagline">
+            Choose how you want to use Lex. You can ask questions anonymously, or apply to answer them as a verified lawyer.
+          </p>
+        </header>
+
+        <div class="welcome-actions">
+          <button type="button" id="btn-client" class="role-btn role-btn-client">
+            <span class="role-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="3.5" />
+                <path d="M5 20c0-3.6 3-6 7-6s7 2.4 7 6" />
+              </svg>
+            </span>
+            <span class="role-btn-copy">
+              <strong>Continue as a Client</strong>
+              <em>Post a question without sharing your identity</em>
+            </span>
+          </button>
+
+          <button type="button" id="btn-lawyer" class="role-btn role-btn-lawyer">
+            <span class="role-btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18" />
+                <path d="M5 7h14" />
+                <path d="M5 7l-3 7a3.5 3.5 0 0 0 6 0L5 7z" />
+                <path d="M19 7l-3 7a3.5 3.5 0 0 0 6 0L19 7z" />
+                <path d="M8 21h8" />
+              </svg>
+            </span>
+            <span class="role-btn-copy">
+              <strong>Apply as a Verified Lawyer</strong>
+              <em>Register, upload your documents, start answering</em>
+            </span>
+          </button>
+        </div>
+
+        <ul class="welcome-points">
+          <li><strong>Anonymous questions</strong><span>Clients are shown only as a random ID.</span></li>
+          <li><strong>Verified lawyers</strong><span>Every lawyer submits a document before answering.</span></li>
+          <li><strong>Private by design</strong><span>No names or identifying details required.</span></li>
+        </ul>
+
+        <p class="welcome-footnote">IntelliCon'26 prototype</p>
+      </section>
+
+      <!-- ============ 2. CLIENT HOME FEED ============ -->
+      <section id="screen-home" class="screen screen-home" aria-label="Client home feed" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Community questions</p>
+          <h1>Anonymous feed</h1>
+          <p class="page-sub">Browse questions from people in situations like yours, or post your own without revealing who you are.</p>
+        </div>
+
+        <div class="client-layout">
+          <form id="ask-form" class="composer" autocomplete="off">
+            <h2 class="composer-title">Ask a question</h2>
+            <label for="ask-text" class="sr-only">Your legal question</label>
+            <textarea
+              id="ask-text"
+              name="question"
+              rows="5"
+              maxlength="400"
+              minlength="15"
+              placeholder="Describe your situation. Leave out names and other identifying details."
+              required
+            ></textarea>
+            <label for="ask-category" class="composer-field">
+              Category
+              <select id="ask-category" name="category">
+                <option>Tenancy</option>
+                <option>Employment</option>
+                <option>Family</option>
+                <option>Consumer</option>
+                <option>Business</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <button type="submit" class="submit-btn composer-btn">Post question</button>
+            <p class="composer-note">Posted under a random anonymous ID. Lawyers never see who you are.</p>
+          </form>
+
+          <div class="client-main">
+
+            <!-- Truth Hub: lawyer-verified fact checks of viral legal claims -->
+            <section class="truth-hub" aria-labelledby="truth-title">
+              <header class="truth-head">
+                <span class="truth-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3z" />
+                    <path d="M8.5 12l2.5 2.5 4.5-5" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="eyebrow">Truth Hub</p>
+                  <h2 id="truth-title">Is that rumor legal? Check before you share.</h2>
+                  <p class="truth-sub">Lawyers fact-check viral legal claims so you can tell what is real.</p>
+                </div>
+              </header>
+
+              <form class="truth-form" id="truth-form" autocomplete="off">
+                <label for="truth-input" class="sr-only">Paste a rumor or social media post</label>
+                <input type="text" id="truth-input" placeholder="Paste a viral claim or social media post" maxlength="300" required />
+                <button type="submit" class="primary-btn">Check this rumor</button>
+              </form>
+
+              <div class="truth-posts">
+
+                <article class="truth-post">
+                  <div class="post-top">
+                    <span class="post-avatar" aria-hidden="true">@</span>
+                    <div>
+                      <strong>@community_alerts</strong>
+                      <span>Social media post · 2h ago</span>
+                    </div>
+                  </div>
+                  <p class="post-text">"URGENT: Landlords can legally walk into your home without any notice if your rent is two days late. Share to protect your family!"</p>
+                  <p class="post-question">Is this legal?</p>
+
+                  <div class="verdict verdict-fake">
+                    <span class="verdict-badge">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5" /><path d="M9 9l6 6M15 9l-6 6" /></svg>
+                      Verified Fake
+                    </span>
+                    <p class="verdict-note">In most places a landlord must give written notice before entering, even when rent is late. Late rent has its own legal process.</p>
+                    <p class="verdict-by">
+                      <span class="verdict-tick" aria-hidden="true">
+                        <svg viewBox="0 0 12 12" width="9" height="9"><path d="M2.6 6.3l2.2 2.2 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                      </span>
+                      Checked by <strong>Adv. Priya Nair</strong> · Verified lawyer · Tenancy
+                    </p>
+                  </div>
+                </article>
+
+                <article class="truth-post">
+                  <div class="post-top">
+                    <span class="post-avatar" aria-hidden="true">@</span>
+                    <div>
+                      <strong>@know_your_rights_daily</strong>
+                      <span>Social media post · Yesterday</span>
+                    </div>
+                  </div>
+                  <p class="post-text">"Your boss is not allowed to fire you just because you asked about unpaid overtime. That is retaliation."</p>
+                  <p class="post-question">Is this legal?</p>
+
+                  <div class="verdict verdict-true">
+                    <span class="verdict-badge">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5" /><path d="M8.5 12.5l2.5 2.5 4.5-5" /></svg>
+                      Verified True
+                    </span>
+                    <p class="verdict-note">Many legal systems protect workers from being punished for raising pay complaints. Keep records, since proving the link matters.</p>
+                    <p class="verdict-by">
+                      <span class="verdict-tick" aria-hidden="true">
+                        <svg viewBox="0 0 12 12" width="9" height="9"><path d="M2.6 6.3l2.2 2.2 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                      </span>
+                      Checked by <strong>Adv. Marcus Webb</strong> · Verified lawyer · Employment
+                    </p>
+                  </div>
+                </article>
+
+              </div>
+              <p class="truth-disclaimer">Sample posts for this prototype. General information only, not legal advice.</p>
+            </section>
+
+            <div id="feed" class="feed" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 3. LAWYER REGISTRATION ============ -->
+      <section id="screen-lawyer" class="screen screen-lawyer" aria-label="Lawyer registration" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Verification</p>
+          <h1>Apply as a Verified Lawyer</h1>
+          <p class="page-sub">
+            Tell us who you are and upload a document that proves you are licensed to practise.
+            Clients only see your verified badge, never your documents.
+          </p>
+        </div>
+
+        <form id="lawyer-form" class="lawyer-form">
+          <label>
+            Full name
+            <input type="text" name="fullName" autocomplete="name" placeholder="Alexandra Chen" required />
+          </label>
+
+          <label>
+            Work email
+            <input type="email" name="email" autocomplete="email" placeholder="achen@firm.com" required />
+          </label>
+
+          <label>
+            Bar registration number
+            <input type="text" name="barNumber" placeholder="TX 24012345" required />
+          </label>
+
+          <label>
+            Jurisdiction
+            <input type="text" name="jurisdiction" placeholder="State or country where you are licensed" required />
+          </label>
+
+          <label>
+            Practice area
+            <select name="practiceArea" required>
+              <option value="" disabled selected>Choose your main area</option>
+              <option>Family law</option>
+              <option>Employment law</option>
+              <option>Tenancy and property</option>
+              <option>Consumer protection</option>
+              <option>Business and contracts</option>
+              <option>Criminal defence</option>
+              <option>Immigration</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+          <label>
+            Years in practice
+            <input type="number" name="years" min="0" max="70" inputmode="numeric" placeholder="e.g. 8" />
+          </label>
+
+          <div class="upload-block">
+            <p class="upload-label" id="upload-label">Verification document</p>
+            <div class="dropzone" id="dropzone">
+              <input
+                type="file"
+                id="verification-file"
+                name="verificationFile"
+                class="dropzone-input"
+                accept=".pdf,image/*"
+                aria-labelledby="upload-label"
+                required
+              />
+              <span class="dropzone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4" />
+                  <path d="M7 9l5-5 5 5" />
+                  <path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />
+                </svg>
+              </span>
+              <strong>Upload your bar license or government ID</strong>
+              <em id="dropzone-hint">PDF or image · click to browse or drop a file here</em>
+            </div>
+          </div>
+
+          <label class="checkbox-row">
+            <input type="checkbox" name="consent" required />
+            <span>I confirm these details are accurate and agree to be verified.</span>
+          </label>
+
+          <button type="submit" class="submit-btn">Submit application</button>
+          <p class="form-note" id="form-note" role="status" hidden></p>
+        </form>
+      </section>
+
+      <!-- ============ 4. LAWYER DASHBOARD (overview) ============ -->
+      <section id="screen-dashboard" class="screen screen-dashboard" aria-label="Lawyer dashboard" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Lawyer dashboard</p>
+          <h1>Welcome back, <span id="dash-name">Alexandra Chen</span></h1>
+          <p class="page-sub">Here is what is waiting for you today. Use the menu on the left to open your chats, room and vault.</p>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card">
+            <p class="stat-label">Open cases</p>
+            <p class="stat-value">3</p>
+            <p class="stat-note">Anonymous questions matching your practice area</p>
+          </article>
+          <article class="stat-card">
+            <p class="stat-label">Unread notifications</p>
+            <p class="stat-value">3</p>
+            <p class="stat-note">New replies and updates</p>
+          </article>
+          <article class="stat-card">
+            <p class="stat-label">Verification</p>
+            <p class="stat-value stat-value-status">
+              Verified
+              <span class="verified-tick" role="img" aria-label="Verified">
+                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                  <path fill="#1d9bf0" d="M12 1.8l2.4 1.7 2.9-.2 1.2 2.7 2.6 1.3-.2 2.9L22.6 12l-1.7 2.4.2 2.9-2.7 1.2-1.3 2.6-2.9-.2L12 22.2l-2.4-1.7-2.9.2-1.2-2.7-2.6-1.3.2-2.9L1.4 12l1.7-2.4-.2-2.9 2.7-1.2 1.3-2.6 2.9.2L12 1.8z" />
+                  <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7.8 12.3l2.9 2.9 5.6-5.8" />
+                </svg>
+              </span>
+            </p>
+            <p class="stat-note">Your badge is visible to clients</p>
+          </article>
+        </div>
+
+        <div class="dash-split">
+          <div class="dash-main">
+          <div class="section-head">
+          <h2>Open cases</h2>
+          <p>Questions from anonymous clients</p>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-card">
+            <div class="case-top"><span class="anon-id">Anon #4821</span><span>2h ago</span></div>
+            <h3>Landlord is keeping my full deposit</h3>
+            <p>Client moved out after two years and says the flat was left clean. The landlord cites "general wear."</p>
+            <div class="case-tags"><span>Tenancy</span><span>Urgent</span></div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-top"><span class="anon-id">Anon #3307</span><span>5h ago</span></div>
+            <h3>Dismissed after raising an overtime complaint</h3>
+            <p>Client was let go a week after asking about unpaid overtime and wants to know if it counts as retaliation.</p>
+            <div class="case-tags"><span>Employment</span><span>New</span></div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-top"><span class="anon-id">Anon #9154</span><span>Yesterday</span></div>
+            <h3>Contractor stopped responding after an advance</h3>
+            <p>Client paid 50% up front for a renovation. Work stopped three weeks ago and calls go unanswered.</p>
+            <div class="case-tags"><span>Consumer</span><span>Contracts</span></div>
+          </article>
+        </div>
+          </div>
+
+          <!-- Top Pro-Bono Lawyers -->
+          <aside class="leaderboard" aria-labelledby="lb-title">
+            <header class="lb-head">
+              <span class="lb-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 4h8v5a4 4 0 0 1-8 0V4z" />
+                  <path d="M8 6H5a1 1 0 0 0-1 1c0 2.2 1.5 3.7 4 4M16 6h3a1 1 0 0 1 1 1c0 2.2-1.5 3.7-4 4" />
+                  <path d="M12 13v4M9 20h6M10 17h4" />
+                </svg>
+              </span>
+              <div>
+                <h2 id="lb-title">Top Pro-Bono Lawyers</h2>
+                <p>Free hours given this month</p>
+              </div>
+            </header>
+
+            <ol class="lb-list">
+              <li class="lb-row lb-row-top">
+                <span class="lb-rank lb-rank-1" aria-label="Rank 1">#1</span>
+                <span class="lb-info"><strong>Priya Nair</strong><span>Family law · 18 cases</span></span>
+                <span class="lb-hours"><strong>64</strong> hrs</span>
+              </li>
+              <li class="lb-row">
+                <span class="lb-rank lb-rank-2" aria-label="Rank 2">#2</span>
+                <span class="lb-info"><strong>Marcus Webb</strong><span>Employment · 15 cases</span></span>
+                <span class="lb-hours"><strong>52</strong> hrs</span>
+              </li>
+              <li class="lb-row">
+                <span class="lb-rank lb-rank-3" aria-label="Rank 3">#3</span>
+                <span class="lb-info"><strong>Elena Rossi</strong><span>Tenancy · 12 cases</span></span>
+                <span class="lb-hours"><strong>47</strong> hrs</span>
+              </li>
+              <li class="lb-row">
+                <span class="lb-rank" aria-label="Rank 4">#4</span>
+                <span class="lb-info"><strong>Daniel Okafor</strong><span>Consumer · 10 cases</span></span>
+                <span class="lb-hours"><strong>39</strong> hrs</span>
+              </li>
+              <li class="lb-row">
+                <span class="lb-rank" aria-label="Rank 5">#5</span>
+                <span class="lb-info"><strong>Sofia Alvarez</strong><span>Immigration · 8 cases</span></span>
+                <span class="lb-hours"><strong>31</strong> hrs</span>
+              </li>
+            </ol>
+
+            <div class="lb-row lb-row-you">
+              <span class="lb-rank" aria-label="Rank 8">#8</span>
+              <span class="lb-info"><strong><span id="lb-you-name">Alexandra Chen</span> <em class="lb-tag">You</em></strong><span>Keep going to climb the board</span></span>
+              <span class="lb-hours"><strong>18</strong> hrs</span>
+            </div>
+
+            <button type="button" class="lb-more" data-soon="Full leaderboard">View full ranking</button>
+            <p class="lb-note">Sample data for this prototype.</p>
+          </aside>
+        </div>
+
+        <!-- Truth Hub Requests: client fact-check requests waiting for a lawyer verdict -->
+        <section class="tr-section" aria-labelledby="tr-title">
+          <div class="tr-head">
+            <h2 id="tr-title">Truth Hub Requests</h2>
+            <span class="tr-count" id="tr-count">3 pending</span>
+          </div>
+          <p class="tr-intro">Clients have asked you to check these viral claims. Review each one and mark it as true or fake.</p>
+
+          <div class="tr-grid" id="tr-grid">
+
+            <article class="tr-card" data-request-id="#TH-204">
+              <header class="tr-top">
+                <span class="anon-id">Anon #5530</span>
+                <span class="tr-time">25 min ago</span>
+                <span class="tr-status">Pending review</span>
+              </header>
+              <div class="tr-tags"><span>Screenshot</span><span>Tenancy</span></div>
+              <figure class="tr-shot">
+                <div class="tr-shot-bar" aria-hidden="true">
+                  <span class="tr-shot-avatar"></span>
+                  <span class="tr-shot-lines"><i></i><i></i></span>
+                </div>
+                <p>"NEW LAW: Landlords must return your deposit within 24 hours or pay you double. Screenshot this and share!"</p>
+                <figcaption>Screenshot from a social media post</figcaption>
+              </figure>
+              <p class="tr-question">Client asks: Is this legal?</p>
+              <div class="tr-actions">
+                <button type="button" class="tr-btn tr-btn-true" data-verdict="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Mark as True</button>
+                <button type="button" class="tr-btn tr-btn-fake" data-verdict="fake"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>Mark as Fake</button>
+              </div>
+            </article>
+
+            <article class="tr-card" data-request-id="#TH-203">
+              <header class="tr-top">
+                <span class="anon-id">Anon #2916</span>
+                <span class="tr-time">1h ago</span>
+                <span class="tr-status">Pending review</span>
+              </header>
+              <div class="tr-tags"><span>Text</span><span>Employment</span></div>
+              <figure class="tr-shot tr-shot-text">
+                <blockquote class="tr-quote">"Group chat message: You cannot be fired while you are on sick leave, no matter what."</blockquote>
+                <figcaption>Pasted text from a group chat</figcaption>
+              </figure>
+              <p class="tr-question">Client asks: Is this true?</p>
+              <div class="tr-actions">
+                <button type="button" class="tr-btn tr-btn-true" data-verdict="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Mark as True</button>
+                <button type="button" class="tr-btn tr-btn-fake" data-verdict="fake"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>Mark as Fake</button>
+              </div>
+            </article>
+
+            <article class="tr-card" data-request-id="#TH-202">
+              <header class="tr-top">
+                <span class="anon-id">Anon #7741</span>
+                <span class="tr-time">3h ago</span>
+                <span class="tr-status">Pending review</span>
+              </header>
+              <div class="tr-tags"><span>Screenshot</span><span>Consumer</span></div>
+              <figure class="tr-shot">
+                <div class="tr-shot-bar" aria-hidden="true">
+                  <span class="tr-shot-avatar"></span>
+                  <span class="tr-shot-lines"><i></i><i></i></span>
+                </div>
+                <p>"Shops are NOT allowed to refuse a refund on sale items. It is illegal! Know your rights."</p>
+                <figcaption>Screenshot from a social media post</figcaption>
+              </figure>
+              <p class="tr-question">Client asks: Is this legal?</p>
+              <div class="tr-actions">
+                <button type="button" class="tr-btn tr-btn-true" data-verdict="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Mark as True</button>
+                <button type="button" class="tr-btn tr-btn-fake" data-verdict="fake"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>Mark as Fake</button>
+              </div>
+            </article>
+
+          </div>
+
+          <p class="tr-allclear" id="tr-allclear" hidden>All caught up. Every request now has a verdict.</p>
+        </section>
+      </section>
+
+      <!-- ============ 5. PROFILE ============ -->
+      <section id="screen-profile" class="screen screen-profile" aria-label="Profile" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Lawyer dashboard</p>
+          <h1>Profile</h1>
+          <p class="page-sub">How you appear to clients and the details we verified.</p>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-hero">
+            <div class="avatar" aria-hidden="true">AC</div>
+            <div>
+              <h2 class="profile-name">
+                <span id="profile-name">Alexandra Chen</span>
+                <span class="verified-tick" role="img" aria-label="Verified">
+                  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path fill="#1d9bf0" d="M12 1.8l2.4 1.7 2.9-.2 1.2 2.7 2.6 1.3-.2 2.9L22.6 12l-1.7 2.4.2 2.9-2.7 1.2-1.3 2.6-2.9-.2L12 22.2l-2.4-1.7-2.9.2-1.2-2.7-2.6-1.3.2-2.9L1.4 12l1.7-2.4-.2-2.9 2.7-1.2 1.3-2.6 2.9.2L12 1.8z" />
+                    <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7.8 12.3l2.9 2.9 5.6-5.8" />
+                  </svg>
+                </span>
+              </h2>
+              <span class="verified-badge">Verified lawyer</span>
+              <p class="profile-role" id="profile-practice">Employment law</p>
+            </div>
+          </div>
+
+          <dl class="profile-meta">
+            <div><dt>Email</dt><dd id="profile-email">achen@firm.com</dd></div>
+            <div><dt>Bar number</dt><dd id="profile-bar">TX 24012345</dd></div>
+            <div><dt>Jurisdiction</dt><dd id="profile-jurisdiction">Texas, USA</dd></div>
+          </dl>
+        </div>
+
+        <p class="placeholder-note">Profile editing is coming soon.</p>
+      </section>
+
+      <!-- ============ 6. COMMON CHAT (placeholder) ============ -->
+      <section id="screen-common-chat" class="screen screen-placeholder" aria-label="Common Chat" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Lawyer dashboard</p>
+          <h1>Common Chat</h1>
+        </div>
+        <div class="empty-state">
+          <span class="icon-tile" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="8" r="3.3" />
+              <path d="M2.8 19.5c0-3.2 2.8-5.2 6.2-5.2s6.2 2 6.2 5.2" />
+              <circle cx="17.2" cy="9" r="2.5" />
+              <path d="M17.4 14.3c2.3.1 3.8 1.7 3.8 4" />
+            </svg>
+          </span>
+          <span class="soon-tag">Coming soon</span>
+          <h3>Common Chat</h3>
+          <p>A shared room where verified lawyers can discuss cases and trade advice.</p>
+        </div>
+      </section>
+
+      <!-- ============ 7. NOTIFICATIONS (placeholder) ============ -->
+      <section id="screen-notifications" class="screen screen-placeholder" aria-label="Notifications" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Lawyer dashboard</p>
+          <h1>Notifications</h1>
+        </div>
+        <div class="empty-state">
+          <span class="icon-tile" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2.5h16L18 16z" />
+              <path d="M10 21h4" />
+            </svg>
+          </span>
+          <span class="soon-tag">Coming soon</span>
+          <h3>Notifications</h3>
+          <p>Alerts for new client questions, replies and verification updates will appear here.</p>
+        </div>
+      </section>
+
+      <!-- ============ 8. MY ROOM (calendar + document storage) ============ -->
+      <section id="screen-my-room" class="screen screen-my-room" aria-label="My Room" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Lawyer dashboard</p>
+          <h1>My Room</h1>
+          <p class="page-sub">Your calendar, reminders and case documents in one personal workspace.</p>
+        </div>
+
+        <div class="room-grid">
+
+          <!-- Left column: calendar + upcoming reminders -->
+          <div class="room-col">
+            <section class="panel calendar-panel" aria-labelledby="cal-title">
+              <header class="panel-head">
+                <div>
+                  <h2 class="panel-title" id="cal-title">Calendar</h2>
+                  <p class="panel-sub">Click a date to add a note or reminder.</p>
+                </div>
+                <div class="cal-nav">
+                  <button type="button" class="icon-btn" id="cal-prev" aria-label="Previous month">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+                  </button>
+                  <span class="cal-month" id="cal-month" aria-live="polite">October 2026</span>
+                  <button type="button" class="icon-btn" id="cal-next" aria-label="Next month">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+                  </button>
+                  <button type="button" class="chip-btn" id="cal-today">Today</button>
+                </div>
+              </header>
+
+              <div class="cal-weekdays" aria-hidden="true">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              </div>
+              <div class="cal-grid" id="cal-grid"></div>
+            </section>
+
+            <section class="panel" aria-labelledby="upcoming-title">
+              <header class="panel-head">
+                <div>
+                  <h2 class="panel-title" id="upcoming-title">Upcoming reminders</h2>
+                  <p class="panel-sub">Your next saved notes, soonest first.</p>
+                </div>
+              </header>
+              <ul class="upcoming-list" id="upcoming-list"></ul>
+            </section>
+          </div>
+
+          <!-- Right column: document storage -->
+          <div class="room-col">
+            <section class="panel docs-panel" aria-labelledby="docs-title">
+              <header class="panel-head">
+                <div>
+                  <h2 class="panel-title" id="docs-title">Case documents</h2>
+                  <p class="panel-sub">Save files for your active cases.</p>
+                </div>
+                <button type="button" class="primary-btn" id="doc-upload-btn">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 16V4" /><path d="M7 9l5-5 5 5" /><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />
+                  </svg>
+                  Upload document
+                </button>
+                <input type="file" id="doc-file-input" multiple hidden />
+              </header>
+
+              <div class="storage">
+                <div class="storage-top">
+                  <strong id="storage-percent">90% Storage Used</strong>
+                  <span id="storage-detail">90.0 MB of 100 MB</span>
+                </div>
+                <div class="meter" id="storage-meter" role="progressbar" aria-label="Storage used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90">
+                  <span class="meter-fill" id="storage-fill"></span>
+                </div>
+                <p class="storage-note" id="storage-note" role="status"></p>
+              </div>
+
+              <aside class="upgrade-banner" id="upgrade-banner" aria-label="Upgrade to Premium">
+                <span class="upgrade-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8z" />
+                  </svg>
+                </span>
+                <div class="upgrade-copy">
+                  <strong>Running out of space?</strong>
+                  <p>Upgrade to Premium to unlock extra storage space for all your case documents.</p>
+                  <p class="upgrade-note" id="upgrade-note" role="status" hidden></p>
+                </div>
+                <button type="button" class="upgrade-btn" id="upgrade-btn">Upgrade to Premium</button>
+              </aside>
+
+              <ul class="doc-list" id="doc-list"></ul>
+            </section>
+          </div>
+        </div>
+
+        <!-- Modal: notes and reminders for one date -->
+        <dialog id="note-dialog" class="note-dialog" aria-labelledby="note-dialog-title">
+          <div class="note-dialog-inner">
+            <header class="dialog-head">
+              <div>
+                <p class="eyebrow">Notes and reminders</p>
+                <h2 id="note-dialog-title">Date</h2>
+              </div>
+              <button type="button" class="icon-btn" id="note-close" aria-label="Close">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+              </button>
+            </header>
+
+            <ul class="note-list" id="note-list"></ul>
+
+            <form id="note-form" class="note-form" autocomplete="off">
+              <label for="note-text">Add a note or reminder
+                <textarea id="note-text" rows="3" maxlength="200" required placeholder="e.g. Call back Anon #4821 about the deposit claim"></textarea>
+              </label>
+              <label for="note-time">Time (optional)
+                <input type="time" id="note-time" />
+              </label>
+              <p class="form-note" id="note-status" role="status" hidden></p>
+              <div class="note-actions">
+                <button type="button" class="ghost-action" id="note-done">Done</button>
+                <button type="submit" class="submit-btn">Save note</button>
+              </div>
+            </form>
+          </div>
+        </dialog>
+      </section>
+
+      <!-- ============ 9. PERSONAL CHAT (messaging) ============ -->
+      <section id="screen-personal-chat" class="screen screen-personal-chat" aria-label="Personal Chat" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Lawyer dashboard</p>
+          <h1>Personal Chat</h1>
+          <p class="page-sub">Private one-to-one messages with clients. Clients appear only as anonymous IDs.</p>
+        </div>
+
+        <div class="chat-shell">
+
+          <!-- Conversation list -->
+          <aside class="chat-sidebar" aria-label="Conversations">
+            <div class="chat-search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+              <input type="search" id="chat-search" placeholder="Search conversations" aria-label="Search conversations" />
+            </div>
+            <ul class="chat-list" id="chat-list"></ul>
+          </aside>
+
+          <!-- Active conversation -->
+          <div class="chat-main">
+            <header class="chat-header">
+              <div class="chat-avatar" id="chat-avatar" aria-hidden="true">48</div>
+              <div class="chat-who">
+                <h2 id="chat-name">Anon #4821</h2>
+                <p id="chat-sub"></p>
+              </div>
+              <div class="chat-actions">
+                <button type="button" class="chat-icon-btn chat-icon-btn-outline" data-soon="Audio call" aria-label="Audio call">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                </button>
+                <button type="button" class="chat-icon-btn chat-icon-btn-outline" data-soon="Video call" aria-label="Video call">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>
+                </button>
+              </div>
+            </header>
+
+            <div class="chat-thread" id="chat-thread" role="log" aria-live="polite" aria-label="Messages" tabindex="0"></div>
+
+            <div class="chat-tools">
+              <button type="button" class="ai-btn" id="btn-ai-summarize">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M10.5 4l1.9 5.6L18 11.5l-5.6 1.9L10.5 19l-1.9-5.6L3 11.5l5.6-1.9L10.5 4z" />
+                  <path d="M18.5 3.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8z" />
+                  <path d="M18.5 15.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6.6-1.4z" />
+                </svg>
+                AI Summarize
+              </button>
+              <span class="chat-tools-hint">Get a quick summary of this case</span>
+            </div>
+
+            <form class="chat-composer" id="chat-form" autocomplete="off">
+              <button type="button" class="chat-icon-btn" data-soon="Attachments" aria-label="Attach a document">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
+              </button>
+              <button type="button" class="chat-icon-btn" data-soon="Camera" aria-label="Open camera">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" /></svg>
+              </button>
+              <input type="text" id="chat-input" class="chat-input" placeholder="Type a message" aria-label="Message" maxlength="500" />
+              <button type="button" class="chat-icon-btn" data-soon="Voice notes" aria-label="Record a voice note">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" /></svg>
+              </button>
+              <button type="submit" class="chat-send" id="chat-send" aria-label="Send message" disabled>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 10. VAULT (placeholder) ============ -->
+      <section id="screen-vault" class="screen screen-placeholder" aria-label="Vault" hidden aria-hidden="true">
+        <div class="page-head">
+          <p class="eyebrow">Lawyer dashboard</p>
+          <h1>Vault</h1>
+        </div>
+        <div class="empty-state">
+          <span class="icon-tile" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="10.5" width="16" height="10" rx="2.5" />
+              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
+              <circle cx="12" cy="15.5" r="1.2" />
+            </svg>
+          </span>
+          <span class="soon-tag">Coming soon</span>
+          <h3>Vault</h3>
+          <p>Secure storage for case documents and files you need to keep private.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============ FLOATING SHORTCUT TO COMMON CHAT (lawyer screens, hidden on Common Chat) ============ -->
+  <button type="button" class="fab" id="fab-chat" aria-label="Open Common Chat" hidden>
+    <span class="fab-label" aria-hidden="true">Common Chat</span>
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4.5 4.5h15a1.5 1.5 0 0 1 1.5 1.5v9.5a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17H4.5A1.5 1.5 0 0 1 3 15.5V6a1.5 1.5 0 0 1 1.5-1.5z" />
+      <path d="M8 9.5h8M8 12.5h5" />
+    </svg>
+  </button>
+
+  <!-- Small toast used for "feature coming soon" messages -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js?v=13"></script>
+</body>
+</html>
