@@ -57,10 +57,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const phoneRegex = /^(07[0-1,2,4,5,6,7,8][0-9]{7})$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/// Sign Up Form Submission (Final Fix)
-const regForm = document.getElementById('regForm');
-if (regForm) {
-    regForm.addEventListener('submit', (e) => {
+    let selectedRole = 'client';
+    const regForm = document.getElementById('regForm');
+    const roleButtons = document.querySelectorAll('.role-btn');
+    const lawyerContinue = document.getElementById('lawyerContinue');
+
+    roleButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            selectedRole = button.dataset.role;
+
+            roleButtons.forEach((roleButton) => {
+                const isSelected = roleButton === button;
+                roleButton.classList.toggle('active', isSelected);
+                roleButton.setAttribute('aria-pressed', String(isSelected));
+            });
+
+            regForm.hidden = selectedRole === 'lawyer';
+            lawyerContinue.hidden = selectedRole !== 'lawyer';
+        });
+    });
+
+    // Sign up form submission
+    if (regForm) {
+        regForm.addEventListener('submit', (e) => {
         e.preventDefault(); 
         let isValid = true;
 
@@ -87,6 +106,7 @@ if (regForm) {
             const userData = {
                 name: fullName.value.trim(),
                 email: emailAdd.value.trim(),
+                role: selectedRole,
                 isPremium: false
             };
             
@@ -96,8 +116,8 @@ if (regForm) {
             // Redirect to Dashboard
             window.location.href = 'dashboard.html';
         }
-    });
-}
+        });
+    }
 
 
     // Helper functions for Errors 

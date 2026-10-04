@@ -124,7 +124,7 @@ nav {
     background-image:
         linear-gradient(to bottom, rgba(12, 26, 46, 0) 65%, rgba(12, 26, 46, 1) 100%),
         linear-gradient(to right, rgba(12, 26, 46, 0.96) 32%, rgba(12, 26, 46, 0.18) 100%),
-        url('../img/hero-bg.jpg');
+        url('../images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -307,6 +307,16 @@ nav {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 10px;
+}
+
+.lawyer-continue {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+#lawyerContinue[hidden] {
+    display: none;
 }
 
 .submit-btn:hover {

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Submit a lawyer application to join LEX.">
+    <title>Lawyer Application | LEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/landing_page.css">
+    <link rel="stylesheet" href="assets/css/lawyer-registration.css">
+    <script src="assets/js/lawyer-registration.js" defer></script>
+</head>
+<body class="lawyer-registration-page">
+    <header class="lawyer-registration-header">
+        <a class="lawyer-registration-brand" href="index.html" aria-label="LEX home">
+            <img src="assets/images/navigation_logo.png" alt="LEX">
+        </a>
+        <a class="lawyer-back-link" href="index.html">Back to home</a>
+    </header>
+
+    <main class="lawyer-registration-main">
+        <section class="lawyer-application-card" aria-labelledby="application-title">
+            <p class="lawyer-application-eyebrow">Professional application</p>
+            <h1 id="application-title">Apply to join LEX</h1>
+            <p class="lawyer-application-intro">Share your contact and professional details. Applications require verification before a lawyer account can be activated.</p>
+
+            <form id="lawyerApplicationForm">
+                <fieldset>
+                    <legend>Contact details</legend>
+                    <div class="lawyer-form-grid">
+                        <label class="lawyer-field">
+                            <span>Full legal name</span>
+                            <input name="name" autocomplete="name" required>
+                        </label>
+                        <label class="lawyer-field">
+                            <span>Email address</span>
+                            <input name="email" type="email" autocomplete="email" required>
+                        </label>
+                        <label class="lawyer-field">
+                            <span>Mobile number</span>
+                            <input name="mobile" type="tel" autocomplete="tel" inputmode="tel" pattern="07[01245678][0-9]{7}" placeholder="07XXXXXXXX" required>
+                        </label>
+                        <label class="lawyer-field">
+                            <span>NIC number</span>
+                            <input name="nic" autocomplete="off" pattern="([0-9]{9}[xXvV]|[0-9]{12})" required>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Professional details</legend>
+                    <div class="lawyer-form-grid">
+                        <label class="lawyer-field">
+                            <span>Bar registration number</span>
+                            <input name="barRegistration" autocomplete="off" required>
+                        </label>
+                        <label class="lawyer-field">
+                            <span>Years of legal experience</span>
+                            <input name="experience" type="number" min="0" max="70" inputmode="numeric" required>
+                        </label>
+                        <label class="lawyer-field">
+                            <span>Primary practice area</span>
+                            <select name="practiceArea" required>
+                                <option value="" selected disabled>Select a practice area</option>
+                                <option>Corporate and business law</option>
+                                <option>Property and real estate</option>
+                                <option>Criminal law</option>
+                                <option>Family law</option>
+                                <option>Employment law</option>
+                                <option>Other</option>
+                            </select>
+                        </label>
+                        <label class="lawyer-field">
+                            <span>Primary court or jurisdiction</span>
+                            <input name="jurisdiction" autocomplete="organization-title" required>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <p class="lawyer-demo-notice">Demo only: this application is saved in this browser and is not sent to LEX. Document verification and account activation need a secure backend.</p>
+                <button class="lawyer-submit-button" type="submit">Save application</button>
+            </form>
+            <p class="lawyer-application-status" id="applicationStatus" role="status" aria-live="polite" hidden></p>
+        </section>
+    </main>
+</body>
+</html>

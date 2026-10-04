@@ -3,13 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEX - Legal Zoom Dashboard</title>
+    <meta name="description" content="Your LEX client workspace for legal guidance, documents, and lawyer services.">
+    <title>LEX | Client Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 <body>
+
+<svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/><path d="M9 21v-6h6v6"/></symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M13 2v7h7M8 13h8M8 17h8"/></symbol>
+    <symbol id="icon-scales" viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M7 7l-4 8h8L7 7Zm10 0-4 8h8l-4-8ZM8 21h8"/></symbol>
+    <symbol id="icon-card" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20M6 15h5"/></symbol>
+    <symbol id="icon-logout" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3h.5a8.5 8.5 0 0 1 8 8z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></symbol>
+    <symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2L12 3ZM19 14l1.1 3.1L23 18l-2.9 1-1.1 3-1-3-3-1 3-1 1-3ZM5 2l.8 2.2L8 5l-2.2.8L5 8l-.8-2.2L2 5l2.2-.8L5 2Z"/></symbol>
+    <symbol id="icon-pen" viewBox="0 0 24 24"><path d="m14 6 4 4M4 20l4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11L4 20Z"/><path d="M13 21h8"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16.2 16.2 4.3 4.3"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24"><path d="m10.3 3.9-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3.1l-8-14a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.7L7.7 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 1.7-.6l3 .5a2 2 0 0 1 1.8 2.6Z"/></symbol>
+    <symbol id="icon-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5M9 9h.01M15 9h.01M9 12h.01M15 12h.01"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+    <symbol id="icon-people" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="icon-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="m8.2 13-1 9 4.8-3 4.8 3-1-9"/></symbol>
+    <symbol id="icon-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
 
 <div class="dashboard-container">
     <!-- Left Sidebar -->
@@ -17,19 +42,19 @@
         <!-- dashboard.html left Sidebar Logo  -->
     <div class="dash-logo">
         <a href="dashboard.html">
-            <img src="img/lex_logo.png" alt="LEX Legal Tech Logo" class="dash-logo-img">
+            <img src="assets/images/lex_logo.png" alt="LEX Legal Tech Logo" class="dash-logo-img">
         </a>
     </div>
         
         <nav class="dash-nav">
-            <a href="#" class="dash-nav-link active" data-tab="tab-home"><span class="icon">🏠</span> Home</a>
-            <a href="#" class="dash-nav-link" data-tab="tab-docs"><span class="icon">📄</span> Documents</a>
-            <a href="#" class="dash-nav-link" data-tab="tab-lawyers"><span class="icon">⚖️</span> Find a Lawyer</a>
-            <a href="#" class="dash-nav-link" data-tab="tab-Upgrade to premium"><span class="icon">💳</span> Upgrade to premium</a>
+            <a href="#" class="dash-nav-link active" data-tab="tab-home"><svg class="icon ui-icon" aria-hidden="true"><use href="#icon-home"></use></svg> Home</a>
+            <a href="#" class="dash-nav-link" data-tab="tab-docs"><svg class="icon ui-icon" aria-hidden="true"><use href="#icon-file"></use></svg> Documents</a>
+            <a href="#" class="dash-nav-link" data-tab="tab-lawyers"><svg class="icon ui-icon" aria-hidden="true"><use href="#icon-scales"></use></svg> Find a Lawyer</a>
+            <a href="#" class="dash-nav-link" data-tab="tab-subscription"><svg class="icon ui-icon" aria-hidden="true"><use href="#icon-card"></use></svg> Plans & pricing</a>
         </nav>
 
         <div class="sidebar-footer">
-            <button id="dashLogoutBtn" class="dash-logout-btn">🚪 Log Out</button>
+            <button id="dashLogoutBtn" class="dash-logout-btn"><svg class="ui-icon" aria-hidden="true"><use href="#icon-logout"></use></svg> Log Out</button>
         </div>
     </aside>
 
@@ -45,7 +70,7 @@
             <div class="dash-profile-trigger" id="clientAccountBadge" style="cursor: pointer;">
                 <div class="dash-avatar" id="dashAvatarInitials">U</div>
                 <span id="dashProfileName">User Name</span>
-                <span class="premium-crown" id="dashPremiumCrown" style="display:none;">👑</span>
+                <span class="premium-crown" id="dashPremiumCrown" style="display:none;" aria-label="Premium member"><svg class="ui-icon" aria-hidden="true"><use href="#icon-award"></use></svg></span>
             </div>
         </header>
 
@@ -56,9 +81,64 @@
             
             <!-- TAB 1: HOME (LEGAL COMMUNITY FEED) -->
 <section id="tab-home" class="dash-tab-content active">
+    <section class="client-overview" aria-labelledby="clientOverviewTitle">
+        <div class="overview-heading">
+            <div>
+                <p class="overview-eyebrow">YOUR LEX WORKSPACE</p>
+                <h1 id="clientOverviewTitle">Legal support, all in one place.</h1>
+                <p class="overview-intro">Get help understanding your next step, organize documents, and connect with legal professionals.</p>
+            </div>
+            <span class="workspace-label"><span aria-hidden="true"></span> Client workspace</span>
+        </div>
+
+        <section class="ai-assistant-promo" aria-labelledby="aiPromoTitle">
+            <div class="ai-promo-copy">
+                <p class="ai-promo-eyebrow">LEX AI SUPPORT ASSISTANT</p>
+                <h2 id="aiPromoTitle">Not sure where to start?</h2>
+                <p>Explore a legal question in plain language, learn common legal terms, and prepare useful questions to take to a lawyer.</p>
+                <div class="ai-promo-actions">
+                    <button class="ai-promo-primary" id="launchAiAssistant" type="button">Try the assistant demo <svg class="ui-icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></button>
+                    <span class="ai-promo-note">Demo preview only—not connected to live AI or a substitute for a lawyer.</span>
+                </div>
+            </div>
+            <div class="ai-promo-preview" aria-hidden="true">
+                <div class="preview-orbit"><span>LEX</span></div>
+                <div class="preview-prompt prompt-one">Explain a legal term</div>
+                <div class="preview-prompt prompt-two">Help me prepare</div>
+            </div>
+        </section>
+
+        <div class="quick-actions-heading">
+            <div>
+                <h2>What would you like to do?</h2>
+                <p>Pick up where you need support.</p>
+            </div>
+        </div>
+        <div class="client-quick-actions">
+            <button class="quick-action-card switch-tab-btn" type="button" data-target="tab-docs">
+                <span class="quick-action-icon" aria-hidden="true"><svg class="ui-icon"><use href="#icon-file"></use></svg></span>
+                <span class="quick-action-copy"><strong>Prepare a document</strong><span>Explore templates and document tools</span></span>
+                <span class="quick-action-arrow" aria-hidden="true"><svg class="ui-icon"><use href="#icon-arrow-right"></use></svg></span>
+            </button>
+            <button class="quick-action-card switch-tab-btn" type="button" data-target="tab-lawyers">
+                <span class="quick-action-icon" aria-hidden="true"><svg class="ui-icon"><use href="#icon-scales"></use></svg></span>
+                <span class="quick-action-copy"><strong>Find a lawyer</strong><span>Explore legal services and consultations</span></span>
+                <span class="quick-action-arrow" aria-hidden="true"><svg class="ui-icon"><use href="#icon-arrow-right"></use></svg></span>
+            </button>
+            <button class="quick-action-card quick-action-community" type="button" id="goToCommunity">
+                <span class="quick-action-icon" aria-hidden="true"><svg class="ui-icon"><use href="#icon-chat"></use></svg></span>
+                <span class="quick-action-copy"><strong>Visit the community</strong><span>Ask a question or read discussions</span></span>
+                <span class="quick-action-arrow" aria-hidden="true"><svg class="ui-icon"><use href="#icon-arrow-right"></use></svg></span>
+            </button>
+        </div>
+    </section>
+
     <div class="community-header">
-        <h1>Legal Community & Advice Forum</h1>
-        <p>Post your legal questions, attach documents or images, and receive advice from verified Supreme Court Advocates.</p>
+        <div>
+            <p class="community-eyebrow">COMMUNITY</p>
+            <h2>Questions & discussions</h2>
+            <p>Share a general question with the LEX community. Avoid posting private or sensitive information.</p>
+        </div>
     </div>
 
     <!-- Create Post Card (Facebook Style) -->
@@ -74,11 +154,11 @@
         <div class="create-post-bottom">
             <div class="attachment-actions">
                 <label for="imageFileInput" class="attach-btn">
-                    <span>📷 image</span>
+                    <span><svg class="ui-icon" aria-hidden="true"><use href="#icon-image"></use></svg> Image</span>
                     <input type="file" id="imageFileInput" accept="image/*" hidden multiple>
                 </label>
                 <label for="docFileInput" class="attach-btn">
-                    <span>📄 Document</span>
+                    <span><svg class="ui-icon" aria-hidden="true"><use href="#icon-file"></use></svg> Document</span>
                     <input type="file" id="docFileInput" accept=".pdf,.doc,.docx,.txt" hidden multiple>
                 </label>
             </div>
@@ -100,9 +180,7 @@
     </div>
     
     <!-- Empty Container: Real ads from the backend will load here dynamically -->
-    <div id="lawyerAdsGrid" class="ads-grid">
-        <!-- Backend API will populate ad cards here -->
-    </div>
+    <div id="lawyerAdsGrid" class="ads-grid"></div>
 </div>
 </section> <!--- Tab Home end--->
           <!-- TAB 2: DOCUMENTS -->
@@ -120,7 +198,7 @@
         <div class="action-cards-grid">
             <!-- AI Contract Review -->
             <div class="action-card ai-review">
-                <div class="card-icon">🧠</div>
+                <div class="card-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkles"></use></svg></div>
                 <h3>AI Contract Analysis</h3>
                 <p>Upload a contract to instantly extract key clauses, risks, and expirations.</p>
                 
@@ -134,7 +212,7 @@
 
             <!-- eSignature -->
             <div class="action-card esign-action">
-                <div class="card-icon">✍️</div>
+                <div class="card-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pen"></use></svg></div>
                 <h3>Secure e-Signature</h3>
                 <p>Upload your drafted agreements to securely sign and request signatures online.</p>
                 
@@ -155,7 +233,7 @@
             </div>
             
             <div class="docs-search-wrapper">
-                <span class="search-icon">🔍</span>
+                <span class="search-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-search"></use></svg></span>
                 <input type="text" id="templateSearchInput" class="modern-search-input" placeholder="Search for templates (e.g., NDA, Lease Agreement)...">
             </div>
 
@@ -164,7 +242,7 @@
                 <button class="doc-tag-modern" data-search="Non-Disclosure Agreement">NDA</button>
                 <button class="doc-tag-modern" data-search="Residential Lease">Residential Lease</button>
                 <button class="doc-tag-modern" data-search="Employment Contract">Employment Contract</button>
-                <button class="doc-tag-modern outline-tag">View All Templates →</button>
+                <button class="doc-tag-modern outline-tag">View All Templates</button>
             </div>
         </div>
         <!-- ============================================== -->
@@ -182,7 +260,7 @@
             <div id="documentHistoryGrid" class="history-grid">
                 <!-- Empty State: sinnce load date in Backend 
                 <div class="empty-history-state">
-                    <span class="empty-icon">📁</span>
+                    <span class="empty-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-folder"></use></svg></span>
                     <h4>No Documents Yet</h4>
                     <p>Your generated and uploaded legal documents will securely appear here.</p>
                 </div>
@@ -192,7 +270,7 @@
                   Loop through history data and append cards like this:
                   <div class="history-item-card">
                       <div class="history-info">
-                          <span class="history-icon">📄</span>
+                          <span class="history-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-file"></use></svg></span>
                           <div class="history-details">
                               <h4>Document Title</h4>
                               <p>Created: YYYY-MM-DD | Status: Signed</p>
@@ -242,7 +320,7 @@
                     <!-- Example empty state for backend dynamic inputs -->
                 </div>
 
-                <button class="dash-btn-primary full-width" style="margin-top: 20px;">✨ Generate Document with AI</button>
+                <button class="dash-btn-primary full-width" style="margin-top: 20px;"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkles"></use></svg> Generate Document with AI</button>
             </div>
 
             <!-- Right Panel: Live Preview -->
@@ -283,7 +361,7 @@
     <div class="booking-mode-container">
         <!-- Emergency Booking Card (Red Tag) -->
         <div class="booking-mode-card emergency-mode" id="btnModeEmergency">
-            <div class="mode-icon">🚨</div>
+            <div class="mode-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-alert"></use></svg></div>
             <h3>Emergency SOS</h3>
             <p>Urgent legal help. Find on-duty lawyers nearby immediately.</p>
             <span class="mode-badge red-badge">High Priority (Red Tag)</span>
@@ -291,7 +369,7 @@
         
         <!-- Normal Booking Card (Blue Tag) -->
         <div class="booking-mode-card normal-mode" id="btnModeNormal">
-            <div class="mode-icon">📅</div>
+            <div class="mode-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-calendar"></use></svg></div>
             <h3>Standard Consultation</h3>
             <p>Book a scheduled meeting or document review.</p>
             <span class="mode-badge blue-badge">Standard (Blue Tag)</span>
@@ -301,7 +379,7 @@
     <!-- 2. Emergency Booking Workspace (Red Tag Workflow) -->
     <div id="emergencyBookingWorkspace" class="booking-workspace" style="display:none;">
         <div class="emergency-alert-box">
-            <h4>⚠️ Emergency GPS Matching</h4>
+            <h4><svg class="ui-icon" aria-hidden="true"><use href="#icon-alert"></use></svg> Emergency GPS Matching</h4>
             <p>Please select your urgent legal issue. The system will scan for active, on-duty lawyers near your current location.</p>
             
             <div class="form-group-modern">
@@ -316,7 +394,7 @@
             </div>
 
             <button id="btnFindEmergencyLawyers" class="dash-btn-primary btn-danger">
-                <span class="btn-icon">📍</span> Scan for Active Nearby Lawyers
+                <svg class="ui-icon btn-icon" aria-hidden="true"><use href="#icon-pin"></use></svg> Scan for Active Nearby Lawyers
             </button>
         </div>
 
@@ -335,7 +413,7 @@
             
             <div class="search-controls-inline">
                 <div class="input-with-icon">
-                    <span>📍</span>
+                    <svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg>
                     <select id="lawyerDistrict" class="modern-select">
                         <option value="">Select District...</option>
                         <option value="ampara">Ampara</option>
@@ -366,7 +444,7 @@
                     </select>
                 </div>
                 <div class="input-with-icon">
-                    <span>⚖️</span>
+                    <svg class="ui-icon" aria-hidden="true"><use href="#icon-scales"></use></svg>
                     <select id="lawyerCategory" class="modern-select">
                         <option value="">Select Legal Category...</option>
                         <option value="corporate">Corporate & Business Law</option>
@@ -387,22 +465,22 @@
             
             <div class="specialty-grid">
                 <div class="specialty-card" data-category="corporate">
-                    <div class="sp-icon">📁</div>
+                    <div class="sp-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-building"></use></svg></div>
                     <h4>Corporate & Business Law</h4>
                     <p>Company incorporation, regulatory compliance, and audits.</p>
                 </div>
                 <div class="specialty-card" data-category="property">
-                    <div class="sp-icon">🏠</div>
+                    <div class="sp-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-home"></use></svg></div>
                     <h4>Property & Real Estate</h4>
                     <p>Title searches, deed drafting, and land dispute resolution.</p>
                 </div>
                 <div class="specialty-card" data-category="contract">
-                    <div class="sp-icon">📄</div>
+                    <div class="sp-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-file"></use></svg></div>
                     <h4>Contract Drafting</h4>
                     <p>Custom legal agreements, NDAs, and employment contracts.</p>
                 </div>
                 <div class="specialty-card" data-category="family">
-                    <div class="sp-icon">👨‍👩‍👧‍👦</div>
+                    <div class="sp-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-people"></use></svg></div>
                     <h4>Family & Civil Law</h4>
                     <p>Divorce proceedings, child custody, and inheritance claims.</p>
                 </div>
@@ -424,7 +502,7 @@
                 <div class="profile-header-info">
                     <h2 id="modalLawyerName">Atty. Samantha Perera, LL.B (Col)</h2>
                     <p class="sp-text" id="modalLawyerSp">Corporate & Business Law • Supreme Court Practitioner</p>
-                    <div class="rating-badge">⭐ 4.9 (142 Reviews)</div>
+                    <div class="rating-badge"><svg class="ui-icon" aria-hidden="true"><use href="#icon-award"></use></svg> 4.9 (142 Reviews)</div>
                 </div>
             </div>
 
@@ -432,11 +510,11 @@
             <div class="profile-body-sec">
                 <div class="info-group">
                     <label>Location</label>
-                    <p>📍 Colombo</p>
+                    <p><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg> Colombo</p>
                 </div>
                 <div class="info-group">
                     <label>Experience</label>
-                    <p>💼 8 Years</p>
+                    <p><svg class="ui-icon" aria-hidden="true"><use href="#icon-building"></use></svg> 8 Years</p>
                 </div>
                 <div class="info-group">
                     <label>Consultation Fee</label>
@@ -447,10 +525,10 @@
             <!-- Communication Buttons -->
             <div class="profile-actions-sec">
                 <button class="dash-btn-outline chat-btn-large" onclick="alert('Opening secure Live Chat window...')">
-                    💬 Live Chat
+                    <svg class="ui-icon" aria-hidden="true"><use href="#icon-chat"></use></svg> Live Chat
                 </button>
                 <button class="dash-btn-primary call-btn-large" onclick="alert('Initiating In-App Call...')">
-                    📞 In-App Call
+                    <svg class="ui-icon" aria-hidden="true"><use href="#icon-phone"></use></svg> In-App Call
                 </button>
             </div>
 
@@ -459,10 +537,10 @@
             <!-- Payment & Rating Section -->
             <div class="profile-bottom-sec">
                 <button class="pay-btn" onclick="alert('Redirecting to Payment Gateway to pay Rs. 5300.00...')">
-                    💳 Pay Consultation Fee
+                    <svg class="ui-icon" aria-hidden="true"><use href="#icon-card"></use></svg> Pay Consultation Fee
                 </button>
                 <button class="rate-btn" onclick="alert('Opening Lawyer Rating & Review Popup...')">
-                    ⭐ Rate this Lawyer
+                    <svg class="ui-icon" aria-hidden="true"><use href="#icon-award"></use></svg> Rate this Lawyer
                 </button>
             </div>
         </div>
@@ -473,7 +551,7 @@
 
             
             <!-- TAB 4: SUBSCRIPTION -->
-<section id="tab-Upgrade to premium" class="dash-tab-content" style="display: none;">
+<section id="tab-subscription" class="dash-tab-content" style="display: none;">
     <div class="pricing-plans-container">
         <div class="pricing-header">
             <h2 class="docs-main-title">Choose Your LEX Legal Plan</h2>
@@ -491,9 +569,9 @@
                 </div>
                 
                 <ul class="plan-features-list">
-                    <li><span class="feature-icon">🤖</span> <strong>5 AI Chatbot Messages</strong> per day</li>
-                    <li><span class="feature-icon">🚨</span> <strong>Emergency Legal Help:</strong> 100% Free App Access <br><small class="sub-text">(No platform fee, pay only the lawyer's fee)</small></li>
-                    <li><span class="feature-icon">📄</span> Basic Legal Template Views</li>
+                    <li><span class="feature-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkles"></use></svg></span> <strong>5 AI Chatbot Messages</strong> per day</li>
+                    <li><span class="feature-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-alert"></use></svg></span> <strong>Emergency Legal Help:</strong> 100% Free App Access <br><small class="sub-text">(No platform fee, pay only the lawyer's fee)</small></li>
+                    <li><span class="feature-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-file"></use></svg></span> Basic Legal Template Views</li>
                 </ul>
 
                 <button class="dash-btn-outline plan-btn disabled-btn" disabled>Current Active Plan</button>
@@ -501,21 +579,21 @@
 
             <!-- 2. PRO PREMIUM CARD -->
             <div class="pricing-card premium-plan-card">
-                <div class="plan-badge-top gold-badge">Most Popular 👑</div>
-                <h3 class="plan-title">Pro Premium <span class="crown-emoji">👑</span></h3>
+                <div class="plan-badge-top gold-badge">Most Popular</div>
+                <h3 class="plan-title">Pro Premium <span class="crown-emoji" aria-label="Premium"><svg class="ui-icon" aria-hidden="true"><use href="#icon-award"></use></svg></span></h3>
                 <div class="plan-price">
                     <span class="price-amount">LKR 2,500</span>
                     <span class="price-period">/ month</span>
                 </div>
 
                 <ul class="plan-features-list">
-                    <li><span class="feature-icon">🤖</span> <strong>Unlimited AI Chatbot</strong> Access</li>
-                    <li><span class="feature-icon">📄</span> <strong>20 Legal Document Generations</strong> per month</li>
-                    <li><span class="feature-icon">⚖️</span> <strong>LKR 0 Platform Fee on Hiring:</strong> Save LKR 300 app fee per lawyer booking</li>
-                    <li><span class="feature-icon">🚨</span> <strong>Emergency Legal Help:</strong> 100% Free Priority Access</li>
+                    <li><span class="feature-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkles"></use></svg></span> <strong>Unlimited AI Chatbot</strong> Access</li>
+                    <li><span class="feature-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-file"></use></svg></span> <strong>20 Legal Document Generations</strong> per month</li>
+                    <li><span class="feature-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-scales"></use></svg></span> <strong>LKR 0 Platform Fee on Hiring:</strong> Save LKR 300 app fee per lawyer booking</li>
+                    <li><span class="feature-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-alert"></use></svg></span> <strong>Emergency Legal Help:</strong> 100% Free Priority Access</li>
                 </ul>
 
-                <button class="dash-btn-primary plan-btn upgrade-btn-gold">Upgrade to Premium 👑</button>
+                <button class="dash-btn-primary plan-btn upgrade-btn-gold">Upgrade to Premium</button>
             </div>
         </div>
     </div>
@@ -526,21 +604,21 @@
 </div>
 
 <!-- Dashboard Script -->
-<script src="js/dashboard.js"></script>
+<script src="assets/js/dashboard.js"></script>
 <!-- CLIENT ACCOUNT SETTINGS MODAL -->
 <div id="clientAccountModal" class="account-modal" style="display: none;">
     <div class="account-modal-content">
         <span class="close-account-btn" id="closeAccountModal">&times;</span>
 
         <div class="account-modal-header">
-            <h2>⚙️ Client Account Settings</h2>
+            <h2>Client Account Settings</h2>
             <p>Manage your profile details and payment methods.</p>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="account-tabs-nav">
             <button class="acc-tab-btn active" id="tabBtnProfile">Personal Profile</button>
-            <button class="acc-tab-btn" id="tabBtnPayment">💳 Payment Cards</button>
+            <button class="acc-tab-btn" id="tabBtnPayment"><svg class="ui-icon" aria-hidden="true"><use href="#icon-card"></use></svg> Payment Cards</button>
         </div>
 
         <!-- TAB 1: Edit Profile Details -->
@@ -570,7 +648,7 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="dash-btn-primary save-acc-btn">💾 Save Changes</button>
+                <button type="submit" class="dash-btn-primary save-acc-btn">Save Changes</button>
             </form>
         </div>
 
@@ -597,7 +675,7 @@
                         <input type="password" placeholder="123" maxlength="4" required />
                     </div>
                 </div>
-                <button type="submit" class="save-card-btn">💳 Add Payment Card</button>
+                <button type="submit" class="save-card-btn"><svg class="ui-icon" aria-hidden="true"><use href="#icon-card"></use></svg> Add Payment Card</button>
             </form>
         </div>
     </div>
@@ -605,34 +683,34 @@
 <!-- FLOATING AI ASSISTANT WIDGET (Must be placed directly before </body>) -->
 <div class="floating-ai-container">
     <!-- Floating Gold FAB Button -->
-    <button id="floatingAiToggle" class="floating-ai-fab" title="Chat with LEX AI">
+    <button id="floatingAiToggle" class="floating-ai-fab" type="button" title="Chat with LEX AI" aria-label="Open LEX AI assistant" aria-expanded="false" aria-controls="floatingAiWidget">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
     </button>
 
     <!-- Chat Box -->
-    <div id="floatingAiWidget" class="floating-ai-widget">
+    <div id="floatingAiWidget" class="floating-ai-widget" role="dialog" aria-label="LEX AI support assistant demo" aria-hidden="true">
         <div class="ai-widget-header">
             <div class="ai-header-info">
-                <div class="ai-avatar-icon">⚖️</div>
+                <div class="ai-avatar-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-scales"></use></svg></div>
                 <div>
                     <h4>LEX AI Assistant</h4>
-                    <span class="ai-status">Online - Ready to help</span>
+                    <span class="ai-status">Demo assistant</span>
                 </div>
             </div>
-            <button id="closeAiWidget" class="ai-close-btn">&times;</button>
+            <button id="closeAiWidget" class="ai-close-btn" type="button" aria-label="Close LEX AI assistant">&times;</button>
         </div>
 
         <div class="ai-widget-body" id="aiWidgetMessages">
             <div class="ai-msg bot-msg">
-                Hello! I am LEX, your AI legal assistant. How can I help you with your legal documents or inquiries today?
+                Hello! I’m the LEX AI support demo. Try asking about a legal term or how to prepare for a lawyer conversation. This demo is not connected to a live AI service and does not provide legal advice.
             </div>
         </div>
 
         <div class="ai-widget-footer">
-            <input type="text" id="aiWidgetInput" placeholder="Ask a legal question..." />
-            <button id="aiWidgetSend" class="ai-send-btn">➤</button>
+            <input type="text" id="aiWidgetInput" placeholder="Ask a general legal question..." aria-label="Message for LEX AI assistant" />
+            <button id="aiWidgetSend" class="ai-send-btn" type="button" aria-label="Send message"><svg class="ui-icon" aria-hidden="true"><use href="#icon-send"></use></svg></button>
         </div>
     </div>
 </div>

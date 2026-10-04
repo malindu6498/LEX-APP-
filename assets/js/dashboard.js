@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    
     if (!user) {
-        window.location.href = '../index.html';
+        window.location.href = 'index.html';
         return;
     }
 
@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             link.classList.add('active');
             const target = link.getAttribute('data-tab');
-            document.getElementById(target).style.display = 'block';
+            const targetSection = document.getElementById(target);
+            if (targetSection) targetSection.style.display = 'block';
         });
     });
 
@@ -34,14 +35,71 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.switch-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const targetTab = btn.getAttribute('data-target');
-            document.querySelector(`[data-tab="${targetTab}"]`).click();
+            const targetLink = document.querySelector(`.dash-nav-link[data-tab="${targetTab}"]`);
+            if (targetLink) targetLink.click();
         });
+    });
+
+    const aiToggle = document.getElementById('floatingAiToggle');
+    const aiWidget = document.getElementById('floatingAiWidget');
+    const aiClose = document.getElementById('closeAiWidget');
+    const aiInput = document.getElementById('aiWidgetInput');
+    const aiSend = document.getElementById('aiWidgetSend');
+    const aiMessages = document.getElementById('aiWidgetMessages');
+
+    function setAiWidgetOpen(isOpen) {
+        aiWidget.classList.toggle('active', isOpen);
+        aiWidget.setAttribute('aria-hidden', String(!isOpen));
+        aiToggle.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) aiInput.focus();
+        else aiToggle.focus();
+    }
+
+    aiToggle.addEventListener('click', () => {
+        setAiWidgetOpen(!aiWidget.classList.contains('active'));
+    });
+    aiClose.addEventListener('click', () => setAiWidgetOpen(false));
+    document.getElementById('launchAiAssistant').addEventListener('click', () => {
+        setAiWidgetOpen(true);
+    });
+
+    function appendAiMessage(text, className) {
+        const message = document.createElement('div');
+        message.className = `ai-msg ${className}`;
+        message.textContent = text;
+        aiMessages.appendChild(message);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+    }
+
+    function sendAiMessage() {
+        const question = aiInput.value.trim();
+        if (!question) return;
+
+        appendAiMessage(question, 'user-msg');
+        aiInput.value = '';
+        appendAiMessage(
+            'This is a front-end demo and is not connected to a live AI service, so I can’t analyze your question yet. Please don’t share confidential details. You can browse document tools or find a lawyer in your workspace.',
+            'bot-msg'
+        );
+    }
+
+    aiSend.addEventListener('click', sendAiMessage);
+    aiInput.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            sendAiMessage();
+        }
+    });
+
+    document.getElementById('goToCommunity').addEventListener('click', () => {
+        document.querySelector('.community-header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('postInputText').focus({ preventScroll: true });
     });
 
     // Logout
     document.getElementById('dashLogoutBtn').addEventListener('click', () => {
         localStorage.removeItem('lexUser');
-        window.location.href = '../index.html';
+        window.location.href = 'index.html';
     });
 
     // Subscribe
@@ -50,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         subBtn.addEventListener('click', () => {
             user.isPremium = true;
             localStorage.setItem('lexUser', JSON.stringify(user));
-            alert("🎉 Upgraded to Premium!");
+            alert("Your plan has been upgraded to Premium.");
             location.reload();
         });
     }
@@ -93,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (att.type === 'image') {
                         attachmentsHTML += `<img src="${att.src}" alt="Attachment">`;
                     } else if (att.type === 'doc') {
-                        attachmentsHTML += `<div class="doc-attach-pill">📄 ${att.name}</div>`;
+                        attachmentsHTML += `<div class="doc-attach-pill"><svg class="ui-icon" aria-hidden="true"><use href="#icon-file"></use></svg> ${att.name}</div>`;
                     }
                 });
                 attachmentsHTML += `</div>`;
@@ -160,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!targetPost.comments) targetPost.comments = [];
             targetPost.comments.push({
                 author: user.name,
-                role: user.isPremium ? "Pro Member 👑" : "Client",
+                role: user.isPremium ? "Pro Member" : "Client",
                 text: text
             });
             // Ready for Backend: Replace this with a POST request to your DB
@@ -209,7 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pendingAttachments.forEach((att, idx) => {
             const item = document.createElement('div');
             item.className = 'preview-item';
-            item.innerHTML = `${att.type === 'image' ? '📷' : '📄'} ${att.name} <span class="remove-attach-btn" data-idx="${idx}">✕</span>`;
+            const attachmentIcon = att.type === 'image' ? 'image' : 'file';
+            item.innerHTML = `<svg class="ui-icon" aria-hidden="true"><use href="#icon-${attachmentIcon}"></use></svg> ${att.name} <button type="button" class="remove-attach-btn" data-idx="${idx}" aria-label="Remove ${att.name}">×</button>`;
             previewBox.appendChild(item);
         });
 
@@ -236,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newPost = {
                 id: Date.now(),
                 author: user.name,
-                role: user.isPremium ? "Pro Member 👑" : "Client",
+                role: user.isPremium ? "Pro Member" : "Client",
                 time: "Just now",
                 content: textInput.value.trim(),
                 attachments: [...pendingAttachments],
@@ -259,6 +318,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the feed on page load
     renderFeed();
+    const lawyerAdsGrid = document.getElementById('lawyerAdsGrid');
+    if (lawyerAdsGrid && lawyerAdsGrid.children.length === 0) {
+        lawyerAdsGrid.closest('.lawyer-ads-section').hidden = true;
+    }
 
     // Search Execution
     // ===================================================
@@ -336,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (templateResultsGrid) {
             templateResultsGrid.innerHTML = `
                 <div style="grid-column: 1/-1; padding: 50px 20px; text-align: center; background: #FFF; border-radius: 12px; border: 1px solid #E8E6D9;">
-                    <div style="font-size: 30px; margin-bottom: 10px;">🔍</div>
+                    <div class="result-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-search"></use></svg></div>
                     <h3 style="margin-bottom: 5px; color: #1A1A1A;">Loading templates for "${query}"...</h3>
                     <p style="font-size: 13px; color: #777;">Fetching document templates from server...</p>
                 </div>
@@ -450,7 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Step 1: Scanning UI
             emergencyLawyersList.innerHTML = `
                 <div style="text-align: center; padding: 40px 20px; border: 1px dashed #E63946; border-radius: 12px; background: #FFF9F9; margin-top: 10px;">
-                    <div style="font-size: 32px; margin-bottom: 15px;">📡</div>
+                    <div class="result-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg></div>
                     <h4 style="color: #E63946; margin-bottom: 8px;">Scanning via GPS for Active Lawyers...</h4>
                     <p style="font-size: 13px; color: #666;">Searching within 10km radius...</p>
                 </div>
@@ -461,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 emergencyLawyersList.innerHTML = `
                     <div class="no-lawyers-fallback">
                         <div class="fallback-header">
-                            <span class="alert-icon">🚨</span>
+                            <span class="alert-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-alert"></use></svg></span>
                             <div>
                                 <h4>No Active Lawyers Responded Nearby</h4>
                                 <p>We couldn't immediately connect you to an on-duty lawyer in your immediate radius.</p>
@@ -471,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="fallback-actions-grid">
                             <!-- Option 1: Direct Hotline Call -->
                             <a href="tel:+94112345678" class="fallback-card call-hotline">
-                                <span class="card-icon">📞</span>
+                                <span class="card-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-phone"></use></svg></span>
                                 <div>
                                     <h5>Call 24/7 Platform Hotline</h5>
                                     <p>Speak with our emergency desk operator immediately.</p>
@@ -480,7 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             <!-- Option 2: Legal Aid Commission -->
                             <a href="tel:1919" class="fallback-card call-police">
-                                <span class="card-icon">🏛️</span>
+                                <span class="card-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-building"></use></svg></span>
                                 <div>
                                     <h5>Government Emergency / Legal Aid</h5>
                                     <p>Dial Govt Helpline (1919 / Police Hotlines)</p>
@@ -489,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             <!-- Option 3: Expand Radius -->
                             <button id="btnExpandRadius" class="fallback-card expand-radius">
-                                <span class="card-icon">🌐</span>
+                                <span class="card-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-globe"></use></svg></span>
                                 <div>
                                     <h5>Expand Search Radius</h5>
                                     <p>Search across the entire province for available advocates.</p>
@@ -531,13 +594,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Loading State
         normalSearchResults.innerHTML = `
             <div style="text-align: center; padding: 40px; border: 1px solid #E8E6D9; border-radius: 12px; background: #FFF;">
-                <div style="font-size: 30px; margin-bottom: 10px;">🔍</div>
+                <div class="result-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-search"></use></svg></div>
                 <h3 style="color: #1A1A1A; margin-bottom: 5px;">Searching Advocates...</h3>
                 <p style="font-size: 13px; color: #666;">District: ${district || 'All'} | Category: ${category || 'All'}</p>
             </div>
         `;
 
-        // ⚙️ when this true its show the example(dummy)
+        // Show the example result while the lawyer search is not connected to a backend.
         const SHOW_EXAMPLE_CARD = true; 
 
         setTimeout(() => {
@@ -554,13 +617,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="lawyer-info-box">
                             <div class="lawyer-name-row">
                                 <h4>Atty. Samantha Perera, LL.B (Col)</h4>
-                                <span class="lawyer-rating">⭐ 4.9 (142 Reviews)</span>
+                                <span class="lawyer-rating"><svg class="ui-icon" aria-hidden="true"><use href="#icon-award"></use></svg> 4.9 (142 Reviews)</span>
                             </div>
                             <p class="lawyer-specialization">Corporate & Business Law • Supreme Court Practitioner</p>
-                            <p class="lawyer-location">📍 Colombo District | 8 Years Experience</p>
+                            <p class="lawyer-location"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg> Colombo District | 8 Years Experience</p>
                         </div>
                         <div class="lawyer-actions-box" style="text-align: right; min-width: auto;">
-                            <span style="color: #0073E6; font-size: 14px; font-weight: 700;">View Profile ➔</span>
+                            <span class="view-profile-link">View Profile <svg class="ui-icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span>
                         </div>
                     </div>
                 `;
