@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    
     if (!user) {
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
         return;
     }
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Logout
     document.getElementById('dashLogoutBtn').addEventListener('click', () => {
         localStorage.removeItem('lexUser');
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     });
 
     // Subscribe
