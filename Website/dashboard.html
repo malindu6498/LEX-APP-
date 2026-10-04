@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEX - Legal Zoom Dashboard</title>
+    <!-- Light Theme CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <!-- Left Sidebar -->
+    <aside class="dash-sidebar">
+        <!-- dashboard.html left Sidebar Logo  -->
+    <div class="dash-logo">
+        <a href="dashboard.html">
+            <img src="img/lex_logo.png" alt="LEX Legal Tech Logo" class="dash-logo-img">
+        </a>
+    </div>
+        
+        <nav class="dash-nav">
+            <a href="#" class="dash-nav-link active" data-tab="tab-home"><span class="icon">🏠</span> Home</a>
+            <a href="#" class="dash-nav-link" data-tab="tab-docs"><span class="icon">📄</span> Documents</a>
+            <a href="#" class="dash-nav-link" data-tab="tab-lawyers"><span class="icon">⚖️</span> Find a Lawyer</a>
+            <a href="#" class="dash-nav-link" data-tab="tab-Upgrade to premium"><span class="icon">💳</span> Upgrade to premium</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="dashLogoutBtn" class="dash-logout-btn">🚪 Log Out</button>
+        </div>
+    </aside>
+
+    <!-- Right Main Area -->
+    <main class="dash-main">
+        
+        <!-- Top Navigation -->
+        <header class="dash-topbar">
+            <div class="topbar-left">
+            <span class="welcome-text">Welcome back, <strong id="dashHeaderUserName">User</strong>!</span>
+            </div>
+
+            <div class="dash-profile-trigger" id="clientAccountBadge" style="cursor: pointer;">
+                <div class="dash-avatar" id="dashAvatarInitials">U</div>
+                <span id="dashProfileName">User Name</span>
+                <span class="premium-crown" id="dashPremiumCrown" style="display:none;">👑</span>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Sections -->
+        <div class="dash-content">
+            
+            
+            
+            <!-- TAB 1: HOME (LEGAL COMMUNITY FEED) -->
+<section id="tab-home" class="dash-tab-content active">
+    <div class="community-header">
+        <h1>Legal Community & Advice Forum</h1>
+        <p>Post your legal questions, attach documents or images, and receive advice from verified Supreme Court Advocates.</p>
+    </div>
+
+    <!-- Create Post Card (Facebook Style) -->
+    <div class="create-post-card">
+        <div class="create-post-top">
+            <div class="dash-avatar" id="postAuthorAvatar">U</div>
+            <textarea id="postInputText" placeholder="Describe your legal problem or ask a question under Sri Lankan law..."></textarea>
+        </div>
+
+        <!-- Attachment Preview Area -->
+        <div id="attachmentPreviewBox" class="attachment-preview-box" style="display: none;"></div>
+
+        <div class="create-post-bottom">
+            <div class="attachment-actions">
+                <label for="imageFileInput" class="attach-btn">
+                    <span>📷 image</span>
+                    <input type="file" id="imageFileInput" accept="image/*" hidden multiple>
+                </label>
+                <label for="docFileInput" class="attach-btn">
+                    <span>📄 Document</span>
+                    <input type="file" id="docFileInput" accept=".pdf,.doc,.docx,.txt" hidden multiple>
+                </label>
+            </div>
+            <button id="btnSubmitPost" class="dash-btn-primary">Post Question</button>
+        </div>
+    </div>
+
+    <!-- Dynamic Community Feed -->
+    <div id="communityFeed" class="community-feed-container">
+        <!-- Posts will be dynamically rendered here by JavaScript (Empty State) -->
+    </div>
+    <!-- ============================================== -->
+<!-- SPONSORED LAWYER ADS SECTION (Backend Ready)  -->
+<!-- ============================================== -->
+<div class="lawyer-ads-section">
+    <div class="ads-header">
+        <h3>Featured Advocates & Services</h3>
+        <span class="sponsored-tag">Sponsored</span>
+    </div>
+    
+    <!-- Empty Container: Real ads from the backend will load here dynamically -->
+    <div id="lawyerAdsGrid" class="ads-grid">
+        <!-- Backend API will populate ad cards here -->
+    </div>
+</div>
+</section> <!--- Tab Home end--->
+          <!-- TAB 2: DOCUMENTS -->
+<section id="tab-docs" class="dash-tab-content" style="display: none;">
+    
+   
+    <!-- VIEW 1: Documents Dashboard Home (Redesigned Custom Layout) -->
+    <div id="docs-home-view" class="custom-docs-layout">
+        <div class="docs-header-modern">
+            <h2 class="docs-main-title">Document Workspace</h2>
+            <p>Draft, analyze, and e-sign your legal documents securely.</p>
+        </div>
+        
+        <!-- Top Section: Upload Actions (AI Review & eSign) -->
+        <div class="action-cards-grid">
+            <!-- AI Contract Review -->
+            <div class="action-card ai-review">
+                <div class="card-icon">🧠</div>
+                <h3>AI Contract Analysis</h3>
+                <p>Upload a contract to instantly extract key clauses, risks, and expirations.</p>
+                
+                <!-- Frontend: File Upload Trigger for AI -->
+                <label for="aiReviewUpload" class="upload-btn primary-gradient">
+                    <span>Upload Document for Review</span>
+                    <input type="file" id="aiReviewUpload" accept=".pdf,.doc,.docx" hidden>
+                </label>
+                <p class="file-hint">Supported: PDF, DOCX (Max 5MB)</p>
+            </div>
+
+            <!-- eSignature -->
+            <div class="action-card esign-action">
+                <div class="card-icon">✍️</div>
+                <h3>Secure e-Signature</h3>
+                <p>Upload your drafted agreements to securely sign and request signatures online.</p>
+                
+                <!-- Frontend: File Upload Trigger for eSign -->
+                <label for="eSignUpload" class="upload-btn dark-gradient">
+                    <span>Upload & e-Sign</span>
+                    <input type="file" id="eSignUpload" accept=".pdf" hidden>
+                </label>
+                <p class="file-hint">Supported: PDF only</p>
+            </div>
+        </div>
+
+        <!-- Bottom Section: Template Library -->
+        <div class="template-library-section">
+            <div class="library-header">
+                <h3>Legal Template Library</h3>
+                <p>Start from verified templates drafted by Sri Lankan attorneys.</p>
+            </div>
+            
+            <div class="docs-search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="templateSearchInput" class="modern-search-input" placeholder="Search for templates (e.g., NDA, Lease Agreement)...">
+            </div>
+
+            <div class="popular-tags-modern">
+                <span class="tag-title">Trending:</span>
+                <button class="doc-tag-modern" data-search="Non-Disclosure Agreement">NDA</button>
+                <button class="doc-tag-modern" data-search="Residential Lease">Residential Lease</button>
+                <button class="doc-tag-modern" data-search="Employment Contract">Employment Contract</button>
+                <button class="doc-tag-modern outline-tag">View All Templates →</button>
+            </div>
+        </div>
+        <!-- ============================================== -->
+        <!-- Document History / Vault Section (Backend Ready)-->
+        <!-- ============================================== -->
+        <div class="document-history-section">
+            <div class="library-header flex-between">
+                <div>
+                    <h3>My Document Vault</h3>
+                    <p>Access your saved, generated, and e-signed documents.</p>
+                </div>
+                <button class="dash-btn-outline dark-outline" style="color:#1a1a1a; border-color:#d1cfc2;">View All</button>
+            </div>
+            
+            <div id="documentHistoryGrid" class="history-grid">
+                <!-- Empty State: sinnce load date in Backend 
+                <div class="empty-history-state">
+                    <span class="empty-icon">📁</span>
+                    <h4>No Documents Yet</h4>
+                    <p>Your generated and uploaded legal documents will securely appear here.</p>
+                </div>
+
+                <!-- 
+                  NOTE FOR BACKEND DEVELOPER: 
+                  Loop through history data and append cards like this:
+                  <div class="history-item-card">
+                      <div class="history-info">
+                          <span class="history-icon">📄</span>
+                          <div class="history-details">
+                              <h4>Document Title</h4>
+                              <p>Created: YYYY-MM-DD | Status: Signed</p>
+                          </div>
+                      </div>
+                      <div class="history-actions">
+                          <button>Download</button>
+                      </div>
+                  </div>
+                -->
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 2: Search Results -->
+    <div id="docs-search-results-view" style="display: none;">
+        <div class="search-header">
+            <button class="back-link" id="btnBackToDocsHome">← Back to Documents</button>
+            <h2>Templates for: <span id="searchQueryText"></span></h2>
+        </div>
+        
+        <!-- Backend API will populate template cards here -->
+        <div id="templateResultsGrid" class="template-results-grid">
+            <!-- Empty state ready for backend rendering -->
+        </div>
+    </div>
+
+    <!-- VIEW 3: Document Generator (Dark Theme) -->
+    <div id="docs-generator-view" style="display: none;">
+        <div class="generator-header">
+            <button class="back-link" id="btnBackToResults">← Back to Templates</button>
+        </div>
+        
+        <div class="generator-container">
+            <!-- Left Panel: Input Form -->
+            <div class="generator-sidebar">
+                <h3>Select & Customize Document</h3>
+                
+                <div class="form-group">
+                    <label>Document Type</label>
+                    <!-- Read-only, set by the selected template from backend -->
+                    <input type="text" id="genDocType" class="dark-input" readonly>
+                </div>
+                
+                <!-- Dynamic form fields container (populated by backend mapping) -->
+                <div id="dynamicFormFields">
+                    <!-- Example empty state for backend dynamic inputs -->
+                </div>
+
+                <button class="dash-btn-primary full-width" style="margin-top: 20px;">✨ Generate Document with AI</button>
+            </div>
+
+            <!-- Right Panel: Live Preview -->
+            <div class="generator-preview">
+                <div class="a4-sheet">
+                    <div class="draft-badge">OFFICIAL DRAFT</div>
+                    <h2 id="previewTitle" class="doc-title">DOCUMENT TITLE</h2>
+                    <div class="doc-body" id="previewBody">
+                        <!-- Backend API will stream the generated document content here -->
+                        <p style="color: #999; text-align: center; margin-top: 50px;">Fill the form to generate the preview...</p>
+                    </div>
+                    <div class="doc-signatures">
+                        <div class="sig-line">Affirmant Signature</div>
+                        <div class="sig-line">Justice of the Peace</div>
+                    </div>
+                </div>
+                
+                <div class="preview-actions">
+                    <button class="dash-btn-outline dark-outline">Copy Plain Text</button>
+                    <button class="dash-btn-primary">Download Legal PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+          
+            <!-- TAB 3: FIND A LAWYER -->
+<section id="tab-lawyers" class="dash-tab-content" style="display: none;">
+    
+    <div class="lawyers-header-modern">
+        <h2 class="docs-main-title">Find an Advocate</h2>
+        <p>Connect with verified Supreme Court Advocates across Sri Lanka.</p>
+    </div>
+
+    <!-- 1. Booking Mode Selection (Emergency vs Normal) -->
+    <div class="booking-mode-container">
+        <!-- Emergency Booking Card (Red Tag) -->
+        <div class="booking-mode-card emergency-mode" id="btnModeEmergency">
+            <div class="mode-icon">🚨</div>
+            <h3>Emergency SOS</h3>
+            <p>Urgent legal help. Find on-duty lawyers nearby immediately.</p>
+            <span class="mode-badge red-badge">High Priority (Red Tag)</span>
+        </div>
+        
+        <!-- Normal Booking Card (Blue Tag) -->
+        <div class="booking-mode-card normal-mode" id="btnModeNormal">
+            <div class="mode-icon">📅</div>
+            <h3>Standard Consultation</h3>
+            <p>Book a scheduled meeting or document review.</p>
+            <span class="mode-badge blue-badge">Standard (Blue Tag)</span>
+        </div>
+    </div>
+
+    <!-- 2. Emergency Booking Workspace (Red Tag Workflow) -->
+    <div id="emergencyBookingWorkspace" class="booking-workspace" style="display:none;">
+        <div class="emergency-alert-box">
+            <h4>⚠️ Emergency GPS Matching</h4>
+            <p>Please select your urgent legal issue. The system will scan for active, on-duty lawyers near your current location.</p>
+            
+            <div class="form-group-modern">
+                <label>Nature of Emergency:</label>
+                <select id="emergencyIssueType" class="modern-select">
+                    <option value="">Select Emergency Type...</option>
+                    <option value="police_arrest">Police Arrest / Bail</option>
+                    <option value="accident">Traffic Accident</option>
+                    <option value="domestic_violence">Domestic Violence</option>
+                    <option value="other_urgent">Other Urgent Matter</option>
+                </select>
+            </div>
+
+            <button id="btnFindEmergencyLawyers" class="dash-btn-primary btn-danger">
+                <span class="btn-icon">📍</span> Scan for Active Nearby Lawyers
+            </button>
+        </div>
+
+        <div id="emergencyLawyersList" class="lawyers-results-grid">
+            <!-- Empty state until scan button is pressed -->
+        </div>
+    </div>
+
+    <!-- 3. Normal Booking Workspace (Blue Tag Workflow) -->
+    <div id="normalBookingWorkspace" class="booking-workspace" style="display:none;">
+        <!-- Search Banner (Location & Category) -->
+        <!-- Search Banner (Location & Category) -->
+        <div class="lawyer-search-banner">
+            <h2>Find an Expert Lawyer Now</h2>
+            <p>Search and hire the best advocates in your district.</p>
+            
+            <div class="search-controls-inline">
+                <div class="input-with-icon">
+                    <span>📍</span>
+                    <select id="lawyerDistrict" class="modern-select">
+                        <option value="">Select District...</option>
+                        <option value="ampara">Ampara</option>
+                        <option value="anuradhapura">Anuradhapura</option>
+                        <option value="badulla">Badulla</option>
+                        <option value="batticaloa">Batticaloa</option>
+                        <option value="colombo">Colombo</option>
+                        <option value="galle">Galle</option>
+                        <option value="gampaha">Gampaha</option>
+                        <option value="hambantota">Hambantota</option>
+                        <option value="jaffna">Jaffna</option>
+                        <option value="kalutara">Kalutara</option>
+                        <option value="kandy">Kandy</option>
+                        <option value="kegalle">Kegalle</option>
+                        <option value="kilinochchi">Kilinochchi</option>
+                        <option value="kurunegala">Kurunegala</option>
+                        <option value="mannar">Mannar</option>
+                        <option value="matale">Matale</option>
+                        <option value="matara">Matara</option>
+                        <option value="moneragala">Moneragala</option>
+                        <option value="mullaitivu">Mullaitivu</option>
+                        <option value="nuwara_eliya">Nuwara Eliya</option>
+                        <option value="polonnaruwa">Polonnaruwa</option>
+                        <option value="puttalam">Puttalam</option>
+                        <option value="ratnapura">Ratnapura</option>
+                        <option value="trincomalee">Trincomalee</option>
+                        <option value="vavuniya">Vavuniya</option>
+                    </select>
+                </div>
+                <div class="input-with-icon">
+                    <span>⚖️</span>
+                    <select id="lawyerCategory" class="modern-select">
+                        <option value="">Select Legal Category...</option>
+                        <option value="corporate">Corporate & Business Law</option>
+                        <option value="property">Property & Real Estate</option>
+                        <option value="contract">Contract Drafting & Review</option>
+                        <option value="criminal">Criminal Defense & Litigation</option>
+                        <option value="family">Family & Civil Law</option>
+                    </select>
+                </div>
+                <button id="btnSearchLawyers" class="dash-btn-primary search-btn-blue">Search</button>
+            </div>
+        </div>
+
+        <!-- Categories Grid -->
+        <div class="specialties-section">
+            <h3>Our Specialized Legal Services</h3>
+            <p>Comprehensive, expert-led legal solutions tailored for every need.</p>
+            
+            <div class="specialty-grid">
+                <div class="specialty-card" data-category="corporate">
+                    <div class="sp-icon">📁</div>
+                    <h4>Corporate & Business Law</h4>
+                    <p>Company incorporation, regulatory compliance, and audits.</p>
+                </div>
+                <div class="specialty-card" data-category="property">
+                    <div class="sp-icon">🏠</div>
+                    <h4>Property & Real Estate</h4>
+                    <p>Title searches, deed drafting, and land dispute resolution.</p>
+                </div>
+                <div class="specialty-card" data-category="contract">
+                    <div class="sp-icon">📄</div>
+                    <h4>Contract Drafting</h4>
+                    <p>Custom legal agreements, NDAs, and employment contracts.</p>
+                </div>
+                <div class="specialty-card" data-category="family">
+                    <div class="sp-icon">👨‍👩‍👧‍👦</div>
+                    <h4>Family & Civil Law</h4>
+                    <p>Divorce proceedings, child custody, and inheritance claims.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="normalSearchResults" style="margin-top: 30px;">
+            <!-- Empty state -->
+        </div>
+    </div>
+    <!-- Lawyer Full Profile Modal -->
+    <div id="lawyerProfileModal" class="profile-modal" style="display: none;">
+        <div class="profile-modal-content">
+            <span class="close-profile-btn" id="closeProfileModal">&times;</span>
+
+            <!-- Profile Header -->
+            <div class="profile-header-sec">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150" alt="Lawyer" id="modalLawyerImg">
+                <div class="profile-header-info">
+                    <h2 id="modalLawyerName">Atty. Samantha Perera, LL.B (Col)</h2>
+                    <p class="sp-text" id="modalLawyerSp">Corporate & Business Law • Supreme Court Practitioner</p>
+                    <div class="rating-badge">⭐ 4.9 (142 Reviews)</div>
+                </div>
+            </div>
+
+            <!-- Profile Body (Details) -->
+            <div class="profile-body-sec">
+                <div class="info-group">
+                    <label>Location</label>
+                    <p>📍 Colombo</p>
+                </div>
+                <div class="info-group">
+                    <label>Experience</label>
+                    <p>💼 8 Years</p>
+                </div>
+                <div class="info-group">
+                    <label>Consultation Fee</label>
+                    <p class="fee-text">Rs. 5,300.00</p>
+                </div>
+            </div>
+
+            <!-- Communication Buttons -->
+            <div class="profile-actions-sec">
+                <button class="dash-btn-outline chat-btn-large" onclick="alert('Opening secure Live Chat window...')">
+                    💬 Live Chat
+                </button>
+                <button class="dash-btn-primary call-btn-large" onclick="alert('Initiating In-App Call...')">
+                    📞 In-App Call
+                </button>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #E8E6D9; margin: 20px 0;">
+
+            <!-- Payment & Rating Section -->
+            <div class="profile-bottom-sec">
+                <button class="pay-btn" onclick="alert('Redirecting to Payment Gateway to pay Rs. 5300.00...')">
+                    💳 Pay Consultation Fee
+                </button>
+                <button class="rate-btn" onclick="alert('Opening Lawyer Rating & Review Popup...')">
+                    ⭐ Rate this Lawyer
+                </button>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+            
+            <!-- TAB 4: SUBSCRIPTION -->
+<section id="tab-Upgrade to premium" class="dash-tab-content" style="display: none;">
+    <div class="pricing-plans-container">
+        <div class="pricing-header">
+            <h2 class="docs-main-title">Choose Your LEX Legal Plan</h2>
+            <p>Unlock AI legal assistance, document generations, and direct attorney consultations.</p>
+        </div>
+
+        <div class="pricing-cards-grid">
+            <!-- 1. FREE TIER CARD -->
+            <div class="pricing-card free-plan-card">
+                <div class="plan-badge-top">Current Plan</div>
+                <h3 class="plan-title">Free Tier</h3>
+                <div class="plan-price">
+                    <span class="price-amount">LKR 0</span>
+                    <span class="price-period">/ month</span>
+                </div>
+                
+                <ul class="plan-features-list">
+                    <li><span class="feature-icon">🤖</span> <strong>5 AI Chatbot Messages</strong> per day</li>
+                    <li><span class="feature-icon">🚨</span> <strong>Emergency Legal Help:</strong> 100% Free App Access <br><small class="sub-text">(No platform fee, pay only the lawyer's fee)</small></li>
+                    <li><span class="feature-icon">📄</span> Basic Legal Template Views</li>
+                </ul>
+
+                <button class="dash-btn-outline plan-btn disabled-btn" disabled>Current Active Plan</button>
+            </div>
+
+            <!-- 2. PRO PREMIUM CARD -->
+            <div class="pricing-card premium-plan-card">
+                <div class="plan-badge-top gold-badge">Most Popular 👑</div>
+                <h3 class="plan-title">Pro Premium <span class="crown-emoji">👑</span></h3>
+                <div class="plan-price">
+                    <span class="price-amount">LKR 2,500</span>
+                    <span class="price-period">/ month</span>
+                </div>
+
+                <ul class="plan-features-list">
+                    <li><span class="feature-icon">🤖</span> <strong>Unlimited AI Chatbot</strong> Access</li>
+                    <li><span class="feature-icon">📄</span> <strong>20 Legal Document Generations</strong> per month</li>
+                    <li><span class="feature-icon">⚖️</span> <strong>LKR 0 Platform Fee on Hiring:</strong> Save LKR 300 app fee per lawyer booking</li>
+                    <li><span class="feature-icon">🚨</span> <strong>Emergency Legal Help:</strong> 100% Free Priority Access</li>
+                </ul>
+
+                <button class="dash-btn-primary plan-btn upgrade-btn-gold">Upgrade to Premium 👑</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+        </div>
+    </main>
+</div>
+
+<!-- Dashboard Script -->
+<script src="js/dashboard.js"></script>
+<!-- CLIENT ACCOUNT SETTINGS MODAL -->
+<div id="clientAccountModal" class="account-modal" style="display: none;">
+    <div class="account-modal-content">
+        <span class="close-account-btn" id="closeAccountModal">&times;</span>
+
+        <div class="account-modal-header">
+            <h2>⚙️ Client Account Settings</h2>
+            <p>Manage your profile details and payment methods.</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="account-tabs-nav">
+            <button class="acc-tab-btn active" id="tabBtnProfile">Personal Profile</button>
+            <button class="acc-tab-btn" id="tabBtnPayment">💳 Payment Cards</button>
+        </div>
+
+        <!-- TAB 1: Edit Profile Details -->
+        <div id="accTabProfile" class="acc-tab-content">
+            <form id="clientProfileForm">
+                <div class="form-grid-2">
+                    <div class="form-group-acc">
+                        <label>Full Name</label>
+                        <input type="text" id="clientFullName" value="Kamal Perera" required />
+                    </div>
+                    <div class="form-group-acc">
+                        <label>Email Address</label>
+                        <input type="email" id="clientEmail" value="kamal.perera@gmail.com" required />
+                    </div>
+                    <div class="form-group-acc">
+                        <label>Phone Number</label>
+                        <input type="tel" id="clientPhone" value="+94 77 123 4567" required />
+                    </div>
+                    <div class="form-group-acc">
+                        <label>District</label>
+                        <select id="clientDistrict" class="acc-select">
+                            <option value="colombo" selected>Colombo</option>
+                            <option value="gampaha">Gampaha</option>
+                            <option value="kandy">Kandy</option>
+                            <option value="galle">Galle</option>
+                            <option value="kurunegala">Kurunegala</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="dash-btn-primary save-acc-btn">💾 Save Changes</button>
+            </form>
+        </div>
+
+        <!-- TAB 2: Add Payment Card -->
+        <div id="accTabPayment" class="acc-tab-content" style="display: none;">
+            <form id="addCardForm">
+                <h4 style="margin-bottom: 15px; color: #1A1A1A; font-size: 15px;">Add Credit / Debit Card</h4>
+                
+                <div class="form-group-acc">
+                    <label>Cardholder Name</label>
+                    <input type="text" placeholder="Kamal Perera" required />
+                </div>
+                <div class="form-group-acc">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="4532 •••• •••• 8921" maxlength="19" required />
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group-acc">
+                        <label>Expiry Date</label>
+                        <input type="text" placeholder="MM/YY" maxlength="5" required />
+                    </div>
+                    <div class="form-group-acc">
+                        <label>CVV / CVC</label>
+                        <input type="password" placeholder="123" maxlength="4" required />
+                    </div>
+                </div>
+                <button type="submit" class="save-card-btn">💳 Add Payment Card</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- FLOATING AI ASSISTANT WIDGET (Must be placed directly before </body>) -->
+<div class="floating-ai-container">
+    <!-- Floating Gold FAB Button -->
+    <button id="floatingAiToggle" class="floating-ai-fab" title="Chat with LEX AI">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </button>
+
+    <!-- Chat Box -->
+    <div id="floatingAiWidget" class="floating-ai-widget">
+        <div class="ai-widget-header">
+            <div class="ai-header-info">
+                <div class="ai-avatar-icon">⚖️</div>
+                <div>
+                    <h4>LEX AI Assistant</h4>
+                    <span class="ai-status">Online - Ready to help</span>
+                </div>
+            </div>
+            <button id="closeAiWidget" class="ai-close-btn">&times;</button>
+        </div>
+
+        <div class="ai-widget-body" id="aiWidgetMessages">
+            <div class="ai-msg bot-msg">
+                Hello! I am LEX, your AI legal assistant. How can I help you with your legal documents or inquiries today?
+            </div>
+        </div>
+
+        <div class="ai-widget-footer">
+            <input type="text" id="aiWidgetInput" placeholder="Ask a legal question..." />
+            <button id="aiWidgetSend" class="ai-send-btn">➤</button>
+        </div>
+    </div>
+</div>
