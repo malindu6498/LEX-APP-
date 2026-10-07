@@ -13,7 +13,7 @@ st.set_page_config(page_title="Sri Lanka Legal Assistant AI", page_icon="⚖️"
 st.title("⚖️ Sri Lanka Legal Assistant AI")
 
 # 2. Set API Key Securely
-os.environ["GROQ_API_KEY"] = "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"
+os.environ["GROQ_API_KEY"] = "#####################"
 
 # 3. Force Python to use .venv packages
 venv_site_packages = r"D:\llm project\Codes_Pych\.venv\Lib\site-packages"
